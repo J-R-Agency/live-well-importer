@@ -45,7 +45,7 @@ function live_well_importer_handle_post(){
 				require_once(ABSPATH . 'wp-admin/includes/image.php');
 
 				// Download and parse the xml
-				$xml = simplexml_load_file(file_get_contents('$api_xml'));
+				$xml = simplexml_load_file( file_get_contents("$api_xml") );
 
 
 				echo " XML Response: " . $xml ;
