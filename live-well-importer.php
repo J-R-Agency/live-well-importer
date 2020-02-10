@@ -115,7 +115,7 @@ function live_well_importer_handle_post(){
 
 						/* UPDATE CUSTOM FIELDS */
 
-						update_field('websiteurl', $item["WebsiteUrl"]);
+						update_field('field_5e418f9203cbd', $item["WebsiteUrl"], $postInsertId);
 
 
 						// This is a little trick to "catch" the image id
