@@ -84,7 +84,7 @@ function live_well_importer_handle_post(){
 					$service = $data["Services"] ;
 					foreach( $service as $item ){
 
-						print_r( $service["Name"] . " // " . $service["Description"] . " // " . $service["Organisation"] . " <br> " );
+						print_r( $item["Name"] . " // " . $item["Description"] . " // " . $item["Organisation"] . " <br> " );
 
 						// Let's start with creating the post itself
 /*						$postCreated = array(
