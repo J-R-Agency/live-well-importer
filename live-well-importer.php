@@ -23,7 +23,7 @@ function live_well_importer_init(){
         <h2>Upload a File</h2>
         <!-- Form to handle the upload - The enctype value here is very important -->
         <form  method=\"post\" enctype=\"multipart/form-data\">
-                <input type=\"file\" id=\"api_xml\" name=\"api_xml\"></input>";
+                <input type=\"text\" id=\"api_xml\" name=\"api_xml\"></input>";
         		submit_button('Import');
         echo "</form>";
 }
