@@ -31,7 +31,7 @@ function live_well_importer_init(){
 
 function live_well_importer_handle_post(){
         // First check if the file appears on the _FILES array
-        if(isset($_POST['api_xml'])){
+        if( isset($_POST['api_xml']) ){
                 $api_url = $_POST['api_url'];
  
                 echo $api_url;
@@ -56,7 +56,7 @@ function live_well_importer_handle_post(){
 				if( $data !== FALSE ){
 					echo " Is DATA ";
 
-					$service=$data["Services"];    
+					$service = $data["Services"];    
 
 					foreach( $service as $field_name => $field_value ) {
 						
@@ -71,7 +71,7 @@ function live_well_importer_handle_post(){
 
 					}
 
-				}else{
+				} else {
 					echo " Not DATA ";
 				}
  
