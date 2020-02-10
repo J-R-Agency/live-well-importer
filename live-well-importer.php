@@ -58,18 +58,18 @@ function live_well_importer_handle_post(){
 
 					$service = $data["Services"];    
 
-					foreach( $service as $field_name => $field_value ) {
+					// foreach( $service as $field_name => $field_value ) {
 						
-						print_r ( $service ) ;
+					// 	print_r ( $service ) ;
 
-						// if ( is_array( $sanitised_value) ) {
-						// 	$sanitised_value = json_encode( $sanitised_value );
-						// } else {
-						// 	$sanitised_value = "(not array) ".$sanitised_value;
-						// }
+					// 	// if ( is_array( $sanitised_value) ) {
+					// 	// 	$sanitised_value = json_encode( $sanitised_value );
+					// 	// } else {
+					// 	// 	$sanitised_value = "(not array) ".$sanitised_value;
+					// 	// }
 
 
-					}
+					// }
 
 				} else {
 					echo " Not DATA ";
