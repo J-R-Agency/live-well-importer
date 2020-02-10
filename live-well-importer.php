@@ -47,7 +47,7 @@ function live_well_importer_handle_post(){
 				// Download and parse the xml
 				$xml = simplexml_load_file( file_get_contents("$api_xml") );
 
-    $json_data = file_get_contents($api_call);  
+    $json_data = file_get_contents($api_xml);  
     //convert json object to php associative array
     $data = json_decode($json_data, true);
 
