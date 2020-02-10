@@ -44,16 +44,13 @@ function live_well_importer_handle_post(){
 				require_once(ABSPATH . 'wp-admin/includes/file.php');
 				require_once(ABSPATH . 'wp-admin/includes/image.php');
 
-				// Download and parse the xml
-				$xml = simplexml_load_file( file_get_contents("$api_url") );
+			    $json_data = file_get_contents($api_url);  
+			    //convert json object to php associative array
+			    $data = json_decode($json_data, true);
 
-    $json_data = file_get_contents($api_url);  
-    //convert json object to php associative array
-    $data = json_decode($json_data, true);
-
-    echo "<pre>";
-    print_r(str_replace(chr(10),"<br />",$data));
-    echo "</pre>";
+			    echo "<pre>";
+			    print_r(str_replace(chr(10),"<br />",$data));
+			    echo "</pre>";
 
 
 				//print_r( file_get_contents("$api_url") );
