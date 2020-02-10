@@ -48,15 +48,15 @@ function live_well_importer_handle_post(){
 				//convert json object to php associative array
 				$data = json_decode($json_data, true);
 
-				// echo "<pre>";
-				// print_r(str_replace(chr(10),"<br />",$data));
-				// echo "</pre>";
+				echo "<pre>";
+				print_r(str_replace(chr(10),"<br />",$data));
+				echo "</pre>";
 
 				// Succesfully loaded?
 				if( $data !== FALSE ){
 					echo " Is DATA ";
 
-					$service = $data["Services"];    
+					//$service = $data["Services"];    
 
 					// foreach( $service as $field_name => $field_value ) {
 						
