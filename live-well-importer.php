@@ -56,9 +56,13 @@ function live_well_importer_handle_post(){
 				//print_r( file_get_contents("$api_url") );
 
 				// Succesfully loaded?
-				if($data !== FALSE){
+				if( $data !== FALSE ){
 					echo " Is DATA ";
-				}else{
+				    echo "<pre>";
+					print_r( $data["Services"] );
+				    echo "<pre>";
+
+				} else {
 					echo " Not DATA ";
 				}
  
