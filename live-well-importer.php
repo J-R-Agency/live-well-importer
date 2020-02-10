@@ -117,7 +117,14 @@ function live_well_importer_handle_post(){
 						// WARNING FIELD NEEDS TO EXIST AND HAVE DATA BEFORE WE CAN ADD TO IT
 						// AND WE NEED TO USE THE FIELD KEY FROM POST META TABLE
 
-						$field_key = get_post_meta( $postInsertId, "_" . strtolower("WebsiteUrl"), true ) ;
+						$field_key = get_post_meta( $postInsertId, "_" . strtolower("WebsiteUrl"), true );
+
+						$acf_post = get_posts( array('title' => 'WebsiteUrl') ) ;
+						foreach ( $posts as $post ) {
+							$field_key = $post["post_name"];
+						}
+
+						// update_field('field_5e418f9203cbd', $item["WebsiteUrl"], $postInsertId);
 						update_field( $field_key, $item["WebsiteUrl"], $postInsertId);
 
 
