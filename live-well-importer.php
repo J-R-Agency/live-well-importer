@@ -16,7 +16,13 @@ function live_well_importer_setup_menu(){
 }
  
 function live_well_importer_init(){
-        echo "<h1>Hello World!</h1>";
+        echo "<h1>Hello World!</h1>
+        <h2>Upload a File</h2>
+        <!-- Form to handle the upload - The enctype value here is very important -->
+        <form  method=\"post\" enctype=\"multipart/form-data\">
+                <input type=\"file\" id=\"test_upload_pdf\" name=\"test_upload_pdf\"></input>";
+        		submit_button('Upload');
+        echo "</form>";
 }
  
 ?>
