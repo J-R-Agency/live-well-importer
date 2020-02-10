@@ -50,6 +50,8 @@ function live_well_importer_handle_post(){
 
 				echo " XML Response: " . $xml ;
 
+				print_r($xml);
+
 				// Succesfully loaded?
 				if($xml !== FALSE){
 					echo " Is XML ";
