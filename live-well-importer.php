@@ -19,7 +19,7 @@ function live_well_importer_init(){
 
 	    live_well_importer_handle_post();
 
-        echo "<h1>Hello World!</h1>
+        echo "<h1>Live Well Importer</h1>
         <h2>Import data from Live Well API (please use Live Well API URL)</h2>
         <!-- Form to handle the upload - The enctype value here is very important -->
         <form  method=\"post\" enctype=\"multipart/form-data\">
@@ -46,6 +46,9 @@ function live_well_importer_handle_post(){
 
 				// Download and parse the xml
 				$xml = simplexml_load_file(file_get_contents($api_xml));
+
+
+				echo " XML Response: " . $xml ;
 
 				// Succesfully loaded?
 				if($xml !== FALSE){
