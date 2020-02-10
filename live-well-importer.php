@@ -48,11 +48,6 @@ function live_well_importer_handle_post(){
 			    //convert json object to php associative array
 			    $data = json_decode($json_data, true);
 
-			    echo "<pre>";
-			    print_r(str_replace(chr(10),"<br />",$data));
-			    echo "</pre>";
-
-
 				//print_r( file_get_contents("$api_url") );
 
 				// Succesfully loaded?
