@@ -114,8 +114,11 @@ function live_well_importer_handle_post(){
 
 
 						/* UPDATE CUSTOM FIELDS */
+						// WARNING FIELD NEEDS TO EXIST AND HAVE DATA BEFORE WE CAN ADD TO IT
+						// AND WE NEED TO USE THE FIELD KEY FROM POST META TABLE
 
-						update_field('field_5e418f9203cbd', $item["WebsiteUrl"], $postInsertId);
+						$field_key = get_post_meta( $postInsertId, "_" . strtolower("WebsiteUrl"), true )
+						update_field( $field_key, $item["WebsiteUrl"], $postInsertId);
 
 
 						// This is a little trick to "catch" the image id
