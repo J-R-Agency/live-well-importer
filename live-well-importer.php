@@ -59,12 +59,12 @@ function live_well_importer_handle_post(){
 
 
 					// First remove all previous imported posts
-					$currentPosts = get_posts(array( 
+					$currentPosts = get_posts( array( 
 						'post_type' 		=> 'activities', // Or "page" or some custom post type
 						'post_status' 		=> 'publish',
 						'meta_key'			=> 'imported', // Our post options to determined
 						'posts_per_page'   	=> 1000 // Just to make sure we've got all our posts, the default is just 5
-					));
+					) );
 
 					// Loop through them
 					foreach($currentPosts as $post){
@@ -81,9 +81,10 @@ function live_well_importer_handle_post(){
 					}
 
 					// Loop through some items in the xml
-					foreach($data["Services"]->item as $item){
+					$service = $data["Services"] ;
+					foreach( $service as $item ){
 
-						print_r( $item );
+						print_r( $service["Name"] . " // " . $service["Description"] . " // " . $service["Organisation"] . " <br> " );
 
 						// Let's start with creating the post itself
 /*						$postCreated = array(
