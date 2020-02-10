@@ -31,7 +31,7 @@ function live_well_importer_init(){
 
 function live_well_importer_handle_post(){
         // First check if the file appears on the _FILES array
-        if( isset($_POST['api_xml']) ){
+        if(isset($_POST['api_xml'])){
                 $api_url = $_POST['api_url'];
  
                 echo $api_url;
@@ -44,6 +44,9 @@ function live_well_importer_handle_post(){
 				require_once(ABSPATH . 'wp-admin/includes/file.php');
 				require_once(ABSPATH . 'wp-admin/includes/image.php');
 
+				// Download and parse the xml
+				$xml = simplexml_load_file( file_get_contents("$api_url") );
+
 				$json_data = file_get_contents($api_url);  
 				//convert json object to php associative array
 				$data = json_decode($json_data, true);
@@ -52,26 +55,16 @@ function live_well_importer_handle_post(){
 				print_r(str_replace(chr(10),"<br />",$data));
 				echo "</pre>";
 
+
+				
+
+
+				//print_r( file_get_contents("$api_xml") );
+
 				// Succesfully loaded?
-				if( $data !== FALSE ){
+				if($data !== FALSE){
 					echo " Is DATA ";
-
-					//$service = $data["Services"];    
-
-					// foreach( $service as $field_name => $field_value ) {
-						
-					// 	print_r ( $service ) ;
-
-					// 	// if ( is_array( $sanitised_value) ) {
-					// 	// 	$sanitised_value = json_encode( $sanitised_value );
-					// 	// } else {
-					// 	// 	$sanitised_value = "(not array) ".$sanitised_value;
-					// 	// }
-
-
-					// }
-
-				} else {
+				}else{
 					echo " Not DATA ";
 				}
  
