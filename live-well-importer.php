@@ -53,9 +53,9 @@ function live_well_importer_handle_post(){
 				// Succesfully loaded?
 				if( $data !== FALSE ){
 					echo " Is DATA ";
-				    echo "<pre>";
+/*				    echo "<pre>";
 					print_r( $data["Services"] );
-				    echo "<pre>";
+				    echo "<pre>";*/
 
 
 					// First remove all previous imported posts
@@ -83,8 +83,10 @@ function live_well_importer_handle_post(){
 					// Loop through some items in the xml
 					foreach($data["Services"]->item as $item){
 
+						print_r( $item );
+
 						// Let's start with creating the post itself
-						$postCreated = array(
+/*						$postCreated = array(
 							'post_title' 	=> $item->Service,
 							'post_content' 	=> $item->Description,
 							'post_excerpt' 	=> $item->Organisation,
@@ -107,7 +109,7 @@ function live_well_importer_handle_post(){
 
 							// Add the post options
 							update_post_meta($postInsertId,$key,$value);
-						}
+						}*/
 
 						// This is a little trick to "catch" the image id
 						// Attach/upload the "sideloaded" image
