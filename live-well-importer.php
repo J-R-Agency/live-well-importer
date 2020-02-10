@@ -31,9 +31,11 @@ function live_well_importer_init(){
 
 function live_well_importer_handle_post(){
         // First check if the file appears on the _FILES array
-        if(isset($_FILES['api_xml'])){
-                $pdf = $_FILES['api_xml'];
+        if(isset($_POST['api_xml'])){
+                $pdf = $_POST['api_xml'];
  
+                echo $_POST['api_xml'];
+                
                 // Use the wordpress function to upload
                 // test_upload_pdf corresponds to the position in the $_FILES array
                 // 0 means the content is not associated with any other posts
