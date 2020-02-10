@@ -112,6 +112,12 @@ function live_well_importer_handle_post(){
 							update_post_meta($postInsertId,$key,$value);
 						}
 
+
+						/* UPDATE CUSTOM FIELDS */
+
+						update_field('websiteurl', $item["WebsiteUrl"]);
+
+
 						// This is a little trick to "catch" the image id
 						// Attach/upload the "sideloaded" image
 						// And remove the little trick
