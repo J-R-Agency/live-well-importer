@@ -87,10 +87,10 @@ function live_well_importer_handle_post(){
 						print_r( $item["Name"] . " // " . $item["Description"] . " // " . $item["Organisation"] . " <br> " );
 
 						// Let's start with creating the post itself
-/*						$postCreated = array(
-							'post_title' 	=> $item->Service,
-							'post_content' 	=> $item->Description,
-							'post_excerpt' 	=> $item->Organisation,
+						$postCreated = array(
+							'post_title' 	=> $item["Name"],
+							'post_content' 	=> $item["Description"],
+							'post_excerpt' 	=> $item["Organisation"],
 							'post_status' 	=> 'publish',
 							'post_type' 	=> 'activities', // Or "page" or some custom post type
 						);
@@ -110,7 +110,7 @@ function live_well_importer_handle_post(){
 
 							// Add the post options
 							update_post_meta($postInsertId,$key,$value);
-						}*/
+						}
 
 						// This is a little trick to "catch" the image id
 						// Attach/upload the "sideloaded" image
