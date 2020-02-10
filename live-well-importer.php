@@ -20,7 +20,7 @@ function live_well_importer_init(){
 	    live_well_importer_handle_post();
 
         echo "<h1>Hello World!</h1>
-        <h2>Upload a File</h2>
+        <h2>Import data from Live Well API (please use Live Well API URL)</h2>
         <!-- Form to handle the upload - The enctype value here is very important -->
         <form  method=\"post\" enctype=\"multipart/form-data\">
                 <input type=\"text\" id=\"api_xml\" name=\"api_xml\"></input>";
@@ -32,21 +32,27 @@ function live_well_importer_init(){
 function live_well_importer_handle_post(){
         // First check if the file appears on the _FILES array
         if(isset($_POST['api_xml'])){
-                $pdf = $_POST['api_xml'];
+                $api_xml = $_POST['api_xml'];
  
-                echo $_POST['api_xml'];
-                
-                // Use the wordpress function to upload
-                // test_upload_pdf corresponds to the position in the $_FILES array
-                // 0 means the content is not associated with any other posts
-                $uploaded=media_handle_upload('api_xml', 0);
-                // Error checking using WP functions
-                if(is_wp_error($uploaded)){
-                        echo "Error uploading file: " . $uploaded->get_error_message();
-                }else{
-                        echo "File upload successful!";
-                        //test_convert($uploaded);
-                }
+                echo $api_xml;
+
+				// Disable a time limit
+				set_time_limit(0);
+
+				// Require some Wordpress core files for processing images
+				require_once(ABSPATH . 'wp-admin/includes/media.php');
+				require_once(ABSPATH . 'wp-admin/includes/file.php');
+				require_once(ABSPATH . 'wp-admin/includes/image.php');
+
+				// Download and parse the xml
+				$xml = simplexml_load_file(file_get_contents($api_xml));
+
+				// Succesfully loaded?
+				if($xml !== FALSE){
+					echo " Is XML ";
+				}else{
+					echo " Not XML ";
+				}
  
  
         }
