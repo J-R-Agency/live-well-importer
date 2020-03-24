@@ -80,11 +80,11 @@ function live_well_importer_handle_post(){
 						wp_delete_post( $post->ID, true);
 					}
 
-					// Loop through some items in the xml
+					// Loop through some items in the xml 
 					$service = $data["Services"] ;
-					foreach( $service as $item ){
+					foreach( $service as $item ){ 
 
-						print_r( $item["Name"] . " // " . explode(",",$item["Locations"]) . " // " . explode(",",$item["Logo"]) . " // " . explode(",",$item["AdditionalInformationFields"]) . " // " . $item["WebsiteUrl"] . " // " . $item["Organisation"] . " <br> " );
+						print_r( $item["Name"] . " // " . implode(",",$item["Locations"]) . " // " . implode(",",$item["Logo"]) . " // " . implode(",",$item["AdditionalInformationFields"]) . " // " . $item["WebsiteUrl"] . " // " . $item["Organisation"] . " <br> " );
 						// Let's start with creating the post itself
 						$postCreated = array(
 							'post_title' 	=> $item["Name"],
