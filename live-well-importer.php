@@ -84,9 +84,12 @@ function live_well_importer_handle_post(){
 					$service = $data["Services"] ;
 					foreach( $service as $item ){ 
 
-						print_r( $item["Name"] . " <br> " . " // " . implode(",",$item["Locations"]) . " // " . implode(",",$item["Logo"]) . " // " . implode(",",$item["AdditionalInformationFields"]) . " // " . $item["WebsiteUrl"] . " // " . $item["Organisation"] . " <br> " );
-
+						print_r( $item["Name"] . " // " . $item["WebsiteUrl"] . " // " . $item["Organisation"] . " <br> " );
+						echo "<pre>";
 						print_r( $item["Locations"] );
+						print_r( $item["Logo"] );
+						print_r( $item["AdditionalInformationFields"] );
+						echo "</pre>";
 
 
 						// Let's start with creating the post itself
