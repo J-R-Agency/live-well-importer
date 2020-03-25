@@ -93,6 +93,10 @@ function live_well_importer_handle_post(){
 						foreach ( $item["AdditionalInformationFields"] as $additionalfield ){
 							echo " AI Field Name: ";
 							print_r( $additionalfield["Name"] );
+
+							foreach ( $additionalfield["Values"] as $additionalfield_values ){
+								print_r( $additionalfield_values["string"] );
+							}
 						}												
 						echo "</pre>";
 
