@@ -23,7 +23,7 @@ function live_well_importer_init(){
         <h2>Import data from Live Well API (please use Live Well API URL)</h2>
         <!-- Form to handle the upload - The enctype value here is very important -->
         <form  method=\"post\" enctype=\"multipart/form-data\">
-                <input type=\"text\" id=\"api_url\" name=\"api_url\"></input>";
+                <input type=\"text\" id=\"api_url\" name=\"api_url\" value=\"https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLActive\"></input>";
         		submit_button('Import');
         echo "</form>";
 }
