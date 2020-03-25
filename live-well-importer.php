@@ -88,7 +88,7 @@ function live_well_importer_handle_post(){
 						echo "<pre>";
 						print_r( $item["Locations"] );
 						print_r( $item["Logo"] );
-						print_r( $item["AdditionalInformationFields"]["Wellbeing-API-theme"] );
+						print_r( implode(",", $item["AdditionalInformationFields"]) );
 						echo "</pre>";
 
 
