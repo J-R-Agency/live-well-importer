@@ -89,6 +89,10 @@ function live_well_importer_handle_post(){
 						print_r( $item["Locations"] );
 						print_r( $item["Logo"] );
 						print_r( implode(",", $item["AdditionalInformationFields"]) );
+
+						foreach ( $item["AdditionalInformationFields"] as $additionalfield ){
+							print_r( $additionalfield );
+						}												}
 						echo "</pre>";
 
 
