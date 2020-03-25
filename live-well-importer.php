@@ -160,18 +160,18 @@ function live_well_importer_handle_post(){
 						$acf_posts = get_posts( array('post_title' => 'Wellbeing-API-Cost-bracket') ) ;
 						$acf_post = get_page_by_title( 'Wellbeing-API-Cost-bracket', OBJECT, 'acf-field' ) ;
 						$field_key = $acf_post->post_name;
-						echo " FIELD KEY: " . $field_key ;
+						//echo " FIELD KEY: " . $field_key ;
 						// update_field('field_5e418f9203cbd', $item["Wellbeing-API-Cost-bracket"], $postInsertId);
-						update_field( "$field_key", $item["Wellbeing-API-Cost-bracket"], $postInsertId);
+						update_field( "field_5e7b6150e5102", $item["Wellbeing-API-Cost-bracket"], $postInsertId);
 
 						// Wellbeing-API-theme
 						$field_key = get_post_meta( $postInsertId, "_" . strtolower("Wellbeing-API-theme"), true );
 						$acf_posts = get_posts( array('post_title' => 'Wellbeing-API-theme') ) ;
 						$acf_post = get_page_by_title( 'Wellbeing-API-theme', OBJECT, 'acf-field' ) ;
 						$field_key = $acf_post->post_name;
-						echo " FIELD KEY: " . $field_key ;
+						//echo " FIELD KEY: " . $field_key ;
 						// update_field('field_5e418f9203cbd', $item["Wellbeing-API-theme"], $postInsertId);
-						update_field( "$field_key", $item["Wellbeing-API-theme"], $postInsertId);
+						update_field( "field_5e7b616ee5103", $item["Wellbeing-API-theme"], $postInsertId);
 
 						// Wellbeing-API-days-of-the-week
 						$field_key = get_post_meta( $postInsertId, "_" . strtolower("Wellbeing-API-days-of-the-week"), true );
@@ -180,8 +180,8 @@ function live_well_importer_handle_post(){
 						$field_key = $acf_post->post_name;
 						echo " FIELD KEY: " . $field_key ;
 						// update_field('field_5e418f9203cbd', $item["Wellbeing-API-days-of-the-week"], $postInsertId);
-						update_field( "$field_key", $item["Wellbeing-API-days-of-the-week"], $postInsertId);
-												
+						update_field( "field_5e7b617fe5104", $item["Wellbeing-API-days-of-the-week"], $postInsertId);
+
 						// This is a little trick to "catch" the image id
 						// Attach/upload the "sideloaded" image
 						// And remove the little trick
