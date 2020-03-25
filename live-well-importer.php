@@ -86,21 +86,31 @@ function live_well_importer_handle_post(){
 
 						print_r( $item["Name"] . " // " . $item["WebsiteUrl"] . " // " . $item["Organisation"] . " <br> " );
 						echo "<pre>";
-						print_r( $item["Locations"] );
-						print_r( $item["Logo"] );
-						print_r( $item["AdditionalInformationFields"] );
+						// print_r( $item["Locations"] );
+						// print_r( $item["Logo"] );
+						// print_r( $item["AdditionalInformationFields"] );
 
 						foreach ( $item["AdditionalInformationFields"] as $additionalfield ){
-							echo " AI Field Name: ";
-							print_r( $additionalfield["Name"] );
-							echo " AI Field Values: ";
-							print_r( $additionalfield["Values"] );
-							echo implode(",", $additionalfield["Values"]);
-							
+							// echo " AI Field Name: ";
+							// print_r( $additionalfield["Name"] );
+							// echo " AI Field Values: ";
+							// print_r( $additionalfield["Values"] );
+							// echo implode(",", $additionalfield["Values"]);
+
 							foreach ( $additionalfield["Values"] as $additionalfield_values ){
 								//print_r( $additionalfield_values["string"] );
 								//echo implode(",", $additionalfield_values["string"]);
 							}
+							if ( $additionalfield["Name"] == "Wellbeing-API-Cost-bracket" ){
+								$wellbeing_api_cost_bracket = implode(",", $additionalfield["Values"]) ;
+							}
+							if ( $additionalfield["Name"] == "Wellbeing-API-theme" ){
+								$wellbeing_api_theme = implode(",", $additionalfield["Values"]) ;
+							}
+							if ( $additionalfield["Name"] == "Wellbeing-API-days-of-the-week" ){
+								$wellbeing_api_days_of_the_week = implode(",", $additionalfield["Values"]) ;
+							}
+							echo " Cost: $wellbeing_api_cost_bracket Theme: $wellbeing_api_theme Days: $wellbeing_api_days_of_the_week " ;
 						}												
 						echo "</pre>";
 
