@@ -92,7 +92,7 @@ function live_well_importer_handle_post(){
 
 						foreach ( $item["AdditionalInformationFields"] as $additionalfield ){
 							echo "API theme: ";
-							print_r( $additionalfield["Wellbeing-API-theme"] );
+							print_r( $additionalfield["Name"] );
 						}												
 						echo "</pre>";
 
