@@ -91,7 +91,7 @@ function live_well_importer_handle_post(){
 						print_r( $item["AdditionalInformationFields"] );
 
 						foreach ( $item["AdditionalInformationFields"] as $additionalfield ){
-							echo "API theme: ";
+							echo " AI Field Name: ";
 							print_r( $additionalfield["Name"] );
 						}												
 						echo "</pre>";
