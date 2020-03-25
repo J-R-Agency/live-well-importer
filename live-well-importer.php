@@ -88,7 +88,7 @@ function live_well_importer_handle_post(){
 						echo "<pre>";
 						print_r( $item["Locations"] );
 						print_r( $item["Logo"] );
-						print_r( $item["AdditionalInformationFields"] );
+						print_r( $item["AdditionalInformationFields"]["Wellbeing-API-theme"] );
 						echo "</pre>";
 
 
@@ -124,16 +124,10 @@ function live_well_importer_handle_post(){
 						// AND WE NEED TO USE THE FIELD KEY FROM POST META TABLE
 
 						$field_key = get_post_meta( $postInsertId, "_" . strtolower("WebsiteUrl"), true );
-
 						$acf_posts = get_posts( array('post_title' => 'WebsiteUrl') ) ;
-
-
 						$acf_post = get_page_by_title( 'WebsiteUrl', OBJECT, 'acf-field' ) ;
-
 						$field_key = $acf_post->post_name;
-
 						echo " FIELD KEY: " . $field_key ;
-	
 						// update_field('field_5e418f9203cbd', $item["WebsiteUrl"], $postInsertId);
 						update_field( "$field_key", $item["WebsiteUrl"], $postInsertId);
 
