@@ -110,8 +110,8 @@ function live_well_importer_handle_post(){
 							if ( $additionalfield["Name"] == "Wellbeing-API-days-of-the-week" ){
 								$wellbeing_api_days_of_the_week = implode(",", $additionalfield["Values"]) ;
 							}
-							echo " Cost: $wellbeing_api_cost_bracket Theme: $wellbeing_api_theme Days: $wellbeing_api_days_of_the_week " ;
 						}												
+						echo " Cost: $wellbeing_api_cost_bracket Theme: $wellbeing_api_theme Days: $wellbeing_api_days_of_the_week " ;
 						echo "</pre>";
 
 
