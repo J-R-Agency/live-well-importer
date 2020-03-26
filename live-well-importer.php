@@ -15,6 +15,46 @@ function live_well_importer_setup_menu(){
         add_menu_page( 'Live Well Importer', 'Live Well Importer', 'manage_options', 'live-well-importer', 'live_well_importer_init' );
 }
  
+
+//hook into the init action and call create_book_taxonomies when it fires
+add_action( 'init', 'create_theme_taxonomy', 0 );
+ 
+//create a custom taxonomy name it topics for your posts
+ 
+function create_theme_taxonomy() {
+ 
+// Add new taxonomy, make it hierarchical like categories
+//first do the translations part for GUI
+ 
+  $labels = array(
+    'name' => _x( 'Themes', 'taxonomy general name' ),
+    'singular_name' => _x( 'Theme', 'taxonomy singular name' ),
+    'search_items' =>  __( 'Search Themes' ),
+    'all_items' => __( 'All Themes' ),
+    'parent_item' => __( 'Parent Theme' ),
+    'parent_item_colon' => __( 'Parent Theme:' ),
+    'edit_item' => __( 'Edit Theme' ), 
+    'update_item' => __( 'Update Theme' ),
+    'add_new_item' => __( 'Add New Theme' ),
+    'new_item_name' => __( 'New Theme Name' ),
+    'menu_name' => __( 'Themes' ),
+  );    
+ 
+// Now register the taxonomy
+ 
+  register_taxonomy('themes',array('activity'), array(
+    'hierarchical' => true,
+    'labels' => $labels,
+    'show_ui' => true,
+    'show_admin_column' => true,
+    'query_var' => true,
+    'rewrite' => array( 'slug' => 'theme' ),
+  ));
+ 
+}
+
+
+
 function live_well_importer_init(){
 
 	    live_well_importer_handle_post();
