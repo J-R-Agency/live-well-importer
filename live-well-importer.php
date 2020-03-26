@@ -82,7 +82,7 @@ function create_cost_taxonomy() {
  
 // Now register the non-hierarchical taxonomy like tag
  
-  register_taxonomy('costs','activity',array(
+  register_taxonomy('costs',array('activity'),array(
     'hierarchical' => false,
     'labels' => $labels,
     'show_ui' => true,
