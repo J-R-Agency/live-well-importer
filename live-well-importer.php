@@ -29,11 +29,13 @@ function live_well_importer_init(){
         echo "</form>";
 }
 
-function wl_api_create_taxonomies($postInsertId){
+function wl_api_create_taxonomies($postInsertId, $wl_api_theme){
 
 	echo " POST ID: $postInsertId " ;
 
-	$terms = array ( 'Active', 'Creative', 'Useful', 'Social', 'Calm' ) ;
+	print_r ($wl_api_theme);
+	
+	$terms = $wl_api_theme ;
 
 	$term_taxonomy_ids = wp_set_post_terms( $postInsertId, $terms, 'themes' );
 
@@ -163,7 +165,10 @@ function live_well_importer_handle_post(){
 						}
 
 
-						add_action( 'save_post', 'wl_api_create_taxonomies', 20, 1 );
+						$wl_api_theme = explode(",", $wellbeing_api_theme );
+
+
+						add_action( 'save_post', 'wl_api_create_taxonomies', 20, 2 );
 
 
 						//wl_api_create_taxonomies($postInsertId);
