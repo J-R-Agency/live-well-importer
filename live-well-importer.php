@@ -43,7 +43,6 @@ function create_taxonomies($postInsertId){
 
 }
 
-add_action( 'init', 'create_taxonomies', 20 );
 
 function live_well_importer_handle_post(){
         // First check if the file appears on the _FILES array
