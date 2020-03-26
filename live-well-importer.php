@@ -80,7 +80,7 @@ function create_cost_taxonomy() {
 // Now register the taxonomy
  
   register_taxonomy('costs',array('activity'), array(
-    'hierarchical' => false,
+    'hierarchical' => true,
     'labels' => $labels,
     'show_ui' => true,
     'show_admin_column' => true,
