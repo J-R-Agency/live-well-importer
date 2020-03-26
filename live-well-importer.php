@@ -36,7 +36,8 @@ function create_taxonomies($postInsertId){
 	$term_taxonomy_ids = wp_set_object_terms( $postInsertId, $terms, 'theme' );
 
 	if ( is_wp_error( $term_taxonomy_ids ) ) {
-	    echo "There was an error somewhere and the terms couldn't be set." ;
+		$error_string = $term_taxonomy_ids -> get_error_message();
+	    echo "There was an error somewhere and the terms couldn't be set. $error_string" ;
 	} else {
 	    echo "Success! These categories were added to the post.";
 	}
