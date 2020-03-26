@@ -29,7 +29,7 @@ function live_well_importer_init(){
         echo "</form>";
 }
 
-function create_taxonomies($postInsertId){
+function wl_api_create_taxonomies($postInsertId){
 
 	echo " POST ID: $postInsertId " ;
 
@@ -163,7 +163,10 @@ function live_well_importer_handle_post(){
 						}
 
 
-						create_taxonomies($postInsertId);
+						add_action( 'save_post', 'wl_api_create_taxonomies', 20, 1 );
+
+
+						//wl_api_create_taxonomies($postInsertId);
 
 						/* UPDATE CUSTOM FIELDS */
 						// WARNING FIELD NEEDS TO EXIST AND HAVE DATA BEFORE WE CAN ADD TO IT
