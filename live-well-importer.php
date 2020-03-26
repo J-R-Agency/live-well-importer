@@ -33,7 +33,7 @@ function wl_api_create_taxonomies($postInsertId, $wl_api_theme){
 
 	echo " POST ID: $postInsertId " ;
 
-	print_r ($wl_api_theme);
+	//print_r ($wl_api_theme);
 
 	$terms = $wl_api_theme ;
 
