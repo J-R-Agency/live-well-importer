@@ -33,7 +33,9 @@ function wl_api_create_taxonomies($postInsertId, $wl_api_terms, $wl_api_taxonomy
 
 	echo " POST ID: $postInsertId " ;
 
-	//print_r ($wl_api_theme);
+	print_r ($wl_api_theme);
+
+	echo " TAX: $wl_api_taxonomy " ;
 
 	//$taxonomy = $wl_api_taxonomy ;
 
