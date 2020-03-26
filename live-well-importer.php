@@ -169,7 +169,8 @@ function live_well_importer_handle_post(){
 						$wl_api_theme = explode(",", $wellbeing_api_theme );
 
 
-						add_action( 'save_post', 'wl_api_create_taxonomies', 20, 2 );
+						//add_action( 'save_post', 'wl_api_create_taxonomies', 20, 2 );
+						wl_api_create_taxonomies($postInsertId, $wellbeing_api_theme);
 
 
 						//wl_api_create_taxonomies($postInsertId);
