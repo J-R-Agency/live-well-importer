@@ -139,15 +139,7 @@ function live_well_importer_handle_post(){
 							'post_excerpt' 	=> $item["Organisation"],
 							'post_status' 	=> 'publish',
 							'post_type' 	=> 'activities', // Or "page" or some custom post type
-							'tax_input' => array ( 
-								'theme' => array ( 
-									'Active',
-									'Creative',
-									'Useful',
-									'Social',
-									'Calm'
-								 ) 
-							) 
+	
 						);
 
 						// Get the increment id from the inserted post
