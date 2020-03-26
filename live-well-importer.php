@@ -35,11 +35,11 @@ function wl_api_create_taxonomies($postInsertId, $wl_api_terms, $wl_api_taxonomy
 
 	//print_r ($wl_api_theme);
 
-	$taxonomy = $wl_api_taxonomy ;
+	//$taxonomy = $wl_api_taxonomy ;
 
 	$terms = $wl_api_theme ;
 
-	$term_taxonomy_ids = wp_set_post_terms( $postInsertId, $terms, $taxonomy );
+	$term_taxonomy_ids = wp_set_post_terms( $postInsertId, $terms, $wl_api_taxonomy );
 
 	if ( is_wp_error( $term_taxonomy_ids ) ) {
 		$error_string = $term_taxonomy_ids -> get_error_message();
@@ -174,20 +174,20 @@ function live_well_importer_handle_post(){
 						wl_api_create_taxonomies ( $postInsertId, $wl_api_theme, "themes" ) ;
 
 
-						$wl_api_cost_bracket = str_replace ( "WLFREE", "Free", $wellbeing_api_cost_bracket, "costs" ) ;
-						$wl_api_cost_bracket = str_replace ( "WLLowCost", "£", $wl_api_cost_bracket, "costs" ) ;
-						$wl_api_cost_bracket = str_replace ( "WLMidCost", "££", $wl_api_cost_bracket, "costs" ) ;
-						$wl_api_cost_bracket = str_replace ( "WLHighCost", "£££", $wl_api_cost_bracket, "costs" ) ;
-						wl_api_create_taxonomies ( $postInsertId, $wl_api_cost_bracket ) ;
+						$wl_api_cost_bracket = str_replace ( "WLFREE", "Free", $wellbeing_api_cost_bracket ) ;
+						$wl_api_cost_bracket = str_replace ( "WLLowCost", "£", $wl_api_cost_bracket ) ;
+						$wl_api_cost_bracket = str_replace ( "WLMidCost", "££", $wl_api_cost_bracket ) ;
+						$wl_api_cost_bracket = str_replace ( "WLHighCost", "£££", $wl_api_cost_bracket ) ;
+						wl_api_create_taxonomies ( $postInsertId, $wl_api_cost_bracket, "costs" ) ;
 
-						$wl_api_days_of_the_week = str_replace( "WLMonday", "Monday", $wellbeing_api_days_of_the_week, "days" ) ;
-						$wl_api_days_of_the_week = str_replace( "WLTuesday", "Tuesday", $wl_api_days_of_the_week, "days" ) ;
-						$wl_api_days_of_the_week = str_replace( "WLWednesday", "Wednesday", $wl_api_days_of_the_week, "days" ) ;
-						$wl_api_days_of_the_week = str_replace( "WLThursday", "Thursday", $wl_api_days_of_the_week, "days" ) ;
-						$wl_api_days_of_the_week = str_replace( "WLFriday", "Friday", $wl_api_days_of_the_week, "days" ) ;
-						$wl_api_days_of_the_week = str_replace( "WLSaturday", "Saturday", $wl_api_days_of_the_week, "days" ) ;
-						$wl_api_days_of_the_week = str_replace( "WLSunday", "Sunday", $wl_api_days_of_the_week, "days" ) ;
-						wl_api_create_taxonomies ( $postInsertId, $wl_api_days_of_the_week ) ;
+						$wl_api_days_of_the_week = str_replace( "WLMonday", "Monday", $wellbeing_api_days_of_the_week ) ;
+						$wl_api_days_of_the_week = str_replace( "WLTuesday", "Tuesday", $wl_api_days_of_the_week ) ;
+						$wl_api_days_of_the_week = str_replace( "WLWednesday", "Wednesday", $wl_api_days_of_the_week ) ;
+						$wl_api_days_of_the_week = str_replace( "WLThursday", "Thursday", $wl_api_days_of_the_week ) ;
+						$wl_api_days_of_the_week = str_replace( "WLFriday", "Friday", $wl_api_days_of_the_week ) ;
+						$wl_api_days_of_the_week = str_replace( "WLSaturday", "Saturday", $wl_api_days_of_the_week ) ;
+						$wl_api_days_of_the_week = str_replace( "WLSunday", "Sunday", $wl_api_days_of_the_week ) ;
+						wl_api_create_taxonomies ( $postInsertId, $wl_api_days_of_the_week, "days" ) ;
 
 						/* UPDATE CUSTOM FIELDS */
 						// WARNING FIELD NEEDS TO EXIST AND HAVE DATA BEFORE WE CAN ADD TO IT
