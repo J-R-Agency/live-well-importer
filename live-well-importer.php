@@ -54,6 +54,47 @@ function create_theme_taxonomy() {
 }
 
 
+//hook into the init action and call create_topics_nonhierarchical_taxonomy when it fires
+ 
+add_action( 'init', 'create_cost_taxonomy', 0 );
+ 
+function create_cost_taxonomy() {
+ 
+// Labels part for the GUI
+ 
+  $labels = array(
+    'name' => _x( 'Costs', 'taxonomy general name' ),
+    'singular_name' => _x( 'Cost', 'taxonomy singular name' ),
+    'search_items' =>  __( 'Search Costs' ),
+    'popular_items' => __( 'Popular Costs' ),
+    'all_items' => __( 'All Costs' ),
+    'parent_item' => null,
+    'parent_item_colon' => null,
+    'edit_item' => __( 'Edit Cost' ), 
+    'update_item' => __( 'Update Cost' ),
+    'add_new_item' => __( 'Add New Cost' ),
+    'new_item_name' => __( 'New Cost Name' ),
+    'separate_items_with_commas' => __( 'Separate Costs with commas' ),
+    'add_or_remove_items' => __( 'Add or remove Costs' ),
+    'choose_from_most_used' => __( 'Choose from the most used Costs' ),
+    'menu_name' => __( 'Costs' ),
+  ); 
+ 
+// Now register the non-hierarchical taxonomy like tag
+ 
+  register_taxonomy('costs','activity',array(
+    'hierarchical' => false,
+    'labels' => $labels,
+    'show_ui' => true,
+    'show_admin_column' => true,
+    'update_count_callback' => '_update_post_term_count',
+    'query_var' => true,
+    'rewrite' => array( 'slug' => 'cost' ),
+  ));
+}
+
+
+
 
 function live_well_importer_init(){
 
