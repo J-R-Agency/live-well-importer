@@ -33,15 +33,12 @@ function wl_api_create_taxonomies($postInsertId, $wl_api_terms, $wl_api_taxonomy
 
 	echo " POST ID: $postInsertId " ;
 
-	print_r ($wl_api_theme);
+	print_r ($wl_api_terms);
 
 	echo " TAX: $wl_api_taxonomy " ;
 
-	//$taxonomy = $wl_api_taxonomy ;
 
-	$terms = $wl_api_theme ;
-
-	$term_taxonomy_ids = wp_set_post_terms( $postInsertId, $terms, $wl_api_taxonomy );
+	$term_taxonomy_ids = wp_set_post_terms( $postInsertId, $wl_api_terms, $wl_api_taxonomy );
 
 	if ( is_wp_error( $term_taxonomy_ids ) ) {
 		$error_string = $term_taxonomy_ids -> get_error_message();
