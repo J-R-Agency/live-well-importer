@@ -29,6 +29,21 @@ function live_well_importer_init(){
         echo "</form>";
 }
 
+function create_taxonomies($postInsertId){
+
+	$terms = array ( 'Active', 'Creative', 'Useful', 'Social', 'Calm' ) ;
+
+	$term_taxonomy_ids = wp_set_object_terms( $postInsertId, $terms, 'theme' );
+
+	if ( is_wp_error( $term_taxonomy_ids ) ) {
+	    echo "There was an error somewhere and the terms couldn't be set." ;
+	} else {
+	    echo "Success! These categories were added to the post.";
+	}
+
+}
+
+add_action( 'init', 'create_taxonomies', 20 );
 
 function live_well_importer_handle_post(){
         // First check if the file appears on the _FILES array
@@ -153,23 +168,9 @@ function live_well_importer_handle_post(){
 							update_post_meta($postInsertId,$key,$value);
 						}
 
-						function create_taxonomies($postInsertId){
 
-												$terms = array ( 'Active', 'Creative', 'Useful', 'Social', 'Calm' ) ;
-
-												$term_taxonomy_ids = wp_set_object_terms( $postInsertId, $terms, 'theme' );
-						 
-												if ( is_wp_error( $term_taxonomy_ids ) ) {
-												    echo "There was an error somewhere and the terms couldn't be set." ;
-												} else {
-												    echo "Success! These categories were added to the post.";
-												}
-
-						}
-
-						add_action( 'init', 'create_taxonomies', 0 );
 						create_taxonomies($postInsertId);
-						
+
 						/* UPDATE CUSTOM FIELDS */
 						// WARNING FIELD NEEDS TO EXIST AND HAVE DATA BEFORE WE CAN ADD TO IT
 						// AND WE NEED TO USE THE FIELD KEY FROM POST META TABLE
