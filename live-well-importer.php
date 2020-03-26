@@ -126,8 +126,14 @@ function live_well_importer_handle_post(){
 							'post_status' 	=> 'publish',
 							'post_type' 	=> 'activities', // Or "page" or some custom post type
 							'tax_input' => array( 
-								'theme' => array ( $wellbeing_api_theme ) 
-								) 
+								'theme' => array ( 
+									'Active',
+									'Creative',
+									'Useful',
+									'Social',
+									'Calm'
+								 ) 
+							) 
 						);
 
 						// Get the increment id from the inserted post
