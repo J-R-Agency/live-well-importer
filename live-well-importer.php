@@ -116,6 +116,8 @@ function live_well_importer_handle_post(){
 						echo "</pre>";
 
 
+						// API themes
+						$wl_api_theme = explode(",", $wellbeing_api_theme);
 						// Let's start with creating the post itself
 						$postCreated = array(
 							'post_title' 	=> $item["Name"],
@@ -123,6 +125,10 @@ function live_well_importer_handle_post(){
 							'post_excerpt' 	=> $item["Organisation"],
 							'post_status' 	=> 'publish',
 							'post_type' 	=> 'activities', // Or "page" or some custom post type
+							'tax_input' => array( 
+								'theme' => $wl_api_theme
+								) 
+							); // support for custom taxonomies. 
 						);
 
 						// Get the increment id from the inserted post
