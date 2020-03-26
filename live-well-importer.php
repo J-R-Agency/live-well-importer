@@ -31,6 +31,8 @@ function live_well_importer_init(){
 
 function create_taxonomies($postInsertId){
 
+	echo " POST ID: $postInsertId " ;
+
 	$terms = array ( 'Active', 'Creative', 'Useful', 'Social', 'Calm' ) ;
 
 	$term_taxonomy_ids = wp_set_object_terms( $postInsertId, $terms, 'theme' );
