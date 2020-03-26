@@ -35,7 +35,7 @@ function wl_api_create_taxonomies($postInsertId){
 
 	$terms = array ( 'Active', 'Creative', 'Useful', 'Social', 'Calm' ) ;
 
-	$term_taxonomy_ids = wp_set_post_terms( $postInsertId, $terms, 'theme' );
+	$term_taxonomy_ids = wp_set_post_terms( $postInsertId, $terms, 'themes' );
 
 	if ( is_wp_error( $term_taxonomy_ids ) ) {
 		$error_string = $term_taxonomy_ids -> get_error_message();
