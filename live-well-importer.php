@@ -34,7 +34,7 @@ function wl_api_create_taxonomies($postInsertId, $wl_api_theme){
 	echo " POST ID: $postInsertId " ;
 
 	print_r ($wl_api_theme);
-	
+
 	$terms = $wl_api_theme ;
 
 	$term_taxonomy_ids = wp_set_post_terms( $postInsertId, $terms, 'themes' );
@@ -126,6 +126,7 @@ function live_well_importer_handle_post(){
 							}
 							if ( $additionalfield["Name"] == "Wellbeing-API-theme" ){
 								$wellbeing_api_theme = implode(",", $additionalfield["Values"]) ;
+								echo " wellbeing_api_theme: $wellbeing_api_theme ";
 							}
 							if ( $additionalfield["Name"] == "Wellbeing-API-days-of-the-week" ){
 								$wellbeing_api_days_of_the_week = implode(",", $additionalfield["Values"]) ;
