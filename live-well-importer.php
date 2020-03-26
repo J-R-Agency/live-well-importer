@@ -31,20 +31,13 @@ function live_well_importer_init(){
 
 function wl_api_create_taxonomies($postInsertId, $wl_api_terms, $wl_api_taxonomy){
 
-	echo " POST ID: $postInsertId " ;
-
-	print_r ($wl_api_terms);
-
-	echo " TAX: $wl_api_taxonomy " ;
-
-
 	$term_taxonomy_ids = wp_set_post_terms( $postInsertId, $wl_api_terms, $wl_api_taxonomy );
 
 	if ( is_wp_error( $term_taxonomy_ids ) ) {
-		$error_string = $term_taxonomy_ids -> get_error_message();
-	    echo "There was an error somewhere and the terms couldn't be set. $error_string" ;
+		// $error_string = $term_taxonomy_ids -> get_error_message();
+	 //    echo "There was an error somewhere and the terms couldn't be set. $error_string" ;
 	} else {
-	    echo "Success! These categories were added to the post.";
+	    // echo "Success! These categories were added to the post.";
 	}
 
 }
