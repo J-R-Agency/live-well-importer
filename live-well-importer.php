@@ -155,7 +155,13 @@ function live_well_importer_handle_post(){
 
 						$terms = array ( 'Active', 'Creative', 'Useful', 'Social', 'Calm' ) ;
 
-						wp_set_object_terms( $postInsertId, $terms, 'theme' );
+						$term_taxonomy_ids = wp_set_object_terms( $postInsertId, $terms, 'theme' );
+ 
+						if ( is_wp_error( $term_taxonomy_ids ) ) {
+						    echo "There was an error somewhere and the terms couldn't be set." ;
+						} else {
+						    echo "Success! These categories were added to the post.";
+						}
 
 						/* UPDATE CUSTOM FIELDS */
 						// WARNING FIELD NEEDS TO EXIST AND HAVE DATA BEFORE WE CAN ADD TO IT
