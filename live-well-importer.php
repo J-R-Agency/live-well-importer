@@ -125,7 +125,7 @@ function live_well_importer_handle_post(){
 							'post_excerpt' 	=> $item["Organisation"],
 							'post_status' 	=> 'publish',
 							'post_type' 	=> 'activities', // Or "page" or some custom post type
-							'tax_input' => array( 
+							'tax_input' => array ( 
 								'theme' => array ( 
 									'Active',
 									'Creative',
@@ -153,6 +153,9 @@ function live_well_importer_handle_post(){
 							update_post_meta($postInsertId,$key,$value);
 						}
 
+						$terms = array ( 'Active', 'Creative', 'Useful', 'Social', 'Calm' ) ;
+
+						wp_set_object_terms( $postInsertId, $terms, 'theme' );
 
 						/* UPDATE CUSTOM FIELDS */
 						// WARNING FIELD NEEDS TO EXIST AND HAVE DATA BEFORE WE CAN ADD TO IT
