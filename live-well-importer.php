@@ -132,8 +132,8 @@ function live_well_importer_handle_post(){
 						// echo "</pre>";
 
 						foreach ( $item["Locations"] as $location ){
-							 echo " Locations: ";
-							 print_r( $location );
+							// echo " Locations: ";
+							// print_r( $location );
 							// echo " AI Field Values: ";
 							// print_r( $additionalfield["Values"] );
 							// echo implode(",", $additionalfield["Values"]);
@@ -145,7 +145,7 @@ function live_well_importer_handle_post(){
 
 						}	
 
-						echo " Main Address: " . $wl_api_main_address ;
+						echo " Main Address: " . $wl_api_main_address . " | " ;
 
 
 						// API themes
