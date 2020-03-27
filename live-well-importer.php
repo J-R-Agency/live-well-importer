@@ -155,7 +155,7 @@ function live_well_importer_handle_post(){
 							// echo implode(",", $additionalfield["Values"]);
 							$wl_api_logo_description = $logo["Description"];
 							$wl_api_logo_url = $logo["Url"];
-
+							echo " DESC: " . $wl_api_logo_description . " URL: " . $wl_api_logo_url . " " ;
 						}
 
 
