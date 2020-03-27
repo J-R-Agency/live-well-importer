@@ -141,11 +141,22 @@ function live_well_importer_handle_post(){
 							 	$wl_api_main_address = $item["Name"] . ", " . $location["AddressLine1"] . ", " . $location["AddressLine2"] . ", " . $location["Postcode"] ;
 							 } else {
 							 	// Main address is already set for this entry
+							 	// echo " Main Address: " . $wl_api_main_address . " | " ;
 							 }
 
 						}	
 
-						echo " Main Address: " . $wl_api_main_address . " | " ;
+
+						foreach ( $item["Logo"] as $logo ){
+							// echo " Locations: ";
+							// print_r( $location );
+							// echo " AI Field Values: ";
+							// print_r( $additionalfield["Values"] );
+							// echo implode(",", $additionalfield["Values"]);
+							$wl_api_logo_description = $logo["Description"];
+							$wl_api_logo_url = $logo["Url"];
+
+						}
 
 
 						// API themes
@@ -247,6 +258,22 @@ function live_well_importer_handle_post(){
 						$field_key = $acf_post->post_name;
 						// echo " FIELD KEY: " . $field_key ;
 						update_field( "$field_key", $wl_api_main_address, $postInsertId);
+
+						// Logo fields
+						$field_key = get_post_meta( $postInsertId, "_" . strtolower("Logo_Description"), true );
+						$acf_posts = get_posts( array('post_title' => 'Logo Description') ) ;
+						$acf_post = get_page_by_title( 'Logo Description', OBJECT, 'acf-field' ) ;
+						$field_key = $acf_post->post_name;
+						// echo " FIELD KEY: " . $field_key ;
+						update_field( "$field_key", $wl_api_logo_description, $postInsertId);
+
+						$field_key = get_post_meta( $postInsertId, "_" . strtolower("Logo_Url"), true );
+						$acf_posts = get_posts( array('post_title' => 'Logo URL') ) ;
+						$acf_post = get_page_by_title( 'Logo URL', OBJECT, 'acf-field' ) ;
+						$field_key = $acf_post->post_name;
+						// echo " FIELD KEY: " . $field_key ;
+						update_field( "$field_key", $wl_api_logo_url, $postInsertId);
+
 
 						// This is a little trick to "catch" the image id
 						// Attach/upload the "sideloaded" image
