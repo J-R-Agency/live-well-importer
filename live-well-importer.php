@@ -148,17 +148,15 @@ function live_well_importer_handle_post(){
 
 
 						foreach ( $item["Logo"] as $logo ){
-							echo " Logo: ";
-							 var_dump( $logo );
+
 							// echo " AI Field Values: ";
 							// print_r( $additionalfield["Values"] );
 							// echo implode(",", $additionalfield["Values"]);
-							$wl_api_logo_description = $logo["Description"];
-							$wl_api_logo_url = $logo["Url"];
-							echo " DESC: " . $wl_api_logo_description . " URL: " . $wl_api_logo_url . " " ;
+							$wl_api_logo[] = $logo;
 						}
 
-
+						echo " DESC: " . $wl_api_logo[0]  . " URL: " . $wl_api_logo[1]  . " " ;
+						
 						// API themes
 						$wl_api_theme = explode(",", $wellbeing_api_theme);
 						// Let's start with creating the post itself
