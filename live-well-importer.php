@@ -146,6 +146,8 @@ function live_well_importer_handle_post(){
 
 						}	
 
+						unset( $wl_api_logo );
+						
 						foreach ( $item["Logo"] as $logo ){
 							$wl_api_logo[] = $logo;
 						}
