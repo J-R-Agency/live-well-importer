@@ -146,16 +146,9 @@ function live_well_importer_handle_post(){
 
 						}	
 
-
 						foreach ( $item["Logo"] as $logo ){
-
-							// echo " AI Field Values: ";
-							// print_r( $additionalfield["Values"] );
-							// echo implode(",", $additionalfield["Values"]);
 							$wl_api_logo[] = $logo;
 						}
-
-						echo " DESC: " . $wl_api_logo[0]  . " URL: " . $wl_api_logo[1]  . " " ;
 						
 						// API themes
 						$wl_api_theme = explode(",", $wellbeing_api_theme);
@@ -263,14 +256,14 @@ function live_well_importer_handle_post(){
 						$acf_post = get_page_by_title( 'Logo Description', OBJECT, 'acf-field' ) ;
 						$field_key = $acf_post->post_name;
 						// echo " FIELD KEY: " . $field_key ;
-						update_field( "$field_key", $wl_api_logo_description, $postInsertId);
+						update_field( "$field_key", $wl_api_logo[0], $postInsertId);
 
 						$field_key = get_post_meta( $postInsertId, "_" . strtolower("Logo_Url"), true );
 						$acf_posts = get_posts( array('post_title' => 'Logo URL') ) ;
 						$acf_post = get_page_by_title( 'Logo URL', OBJECT, 'acf-field' ) ;
 						$field_key = $acf_post->post_name;
 						// echo " FIELD KEY: " . $field_key ;
-						update_field( "$field_key", $wl_api_logo_url, $postInsertId);
+						update_field( "$field_key", $wl_api_logo[1], $postInsertId);
 
 
 						// This is a little trick to "catch" the image id
