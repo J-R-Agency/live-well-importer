@@ -149,7 +149,7 @@ function live_well_importer_handle_post(){
 
 						foreach ( $item["Logo"] as $logo ){
 							echo " Logo: ";
-							 print_r( $logo );
+							 var_dump( $logo );
 							// echo " AI Field Values: ";
 							// print_r( $additionalfield["Values"] );
 							// echo implode(",", $additionalfield["Values"]);
