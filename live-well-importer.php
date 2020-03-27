@@ -128,6 +128,15 @@ function live_well_importer_handle_post(){
 						// echo " Cost: $wellbeing_api_cost_bracket Theme: $wellbeing_api_theme Days: $wellbeing_api_days_of_the_week " ;
 						// echo "</pre>";
 
+						foreach ( $item["Locations"] as $location ){
+							 echo " Locations: ";
+							 print_r( $location );
+							// echo " AI Field Values: ";
+							// print_r( $additionalfield["Values"] );
+							// echo implode(",", $additionalfield["Values"]);
+
+
+						}	
 
 						// API themes
 						$wl_api_theme = explode(",", $wellbeing_api_theme);
