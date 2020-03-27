@@ -99,7 +99,7 @@ function live_well_importer_handle_post(){
 					foreach( $service as $item ){ 
 
 						print_r( $item["Name"] . " // " . $item["WebsiteUrl"] . " // " . $item["Organisation"] . " <br> " );
-						echo "<pre>";
+						// echo "<pre>";
 						// print_r( $item["Locations"] );
 						// print_r( $item["Logo"] );
 						// print_r( $item["AdditionalInformationFields"] );
@@ -120,14 +120,13 @@ function live_well_importer_handle_post(){
 							}
 							if ( $additionalfield["Name"] == "Wellbeing-API-theme" ){
 								$wellbeing_api_theme = implode(",", $additionalfield["Values"]) ;
-								echo " wellbeing_api_theme: $wellbeing_api_theme ";
 							}
 							if ( $additionalfield["Name"] == "Wellbeing-API-days-of-the-week" ){
 								$wellbeing_api_days_of_the_week = implode(",", $additionalfield["Values"]) ;
 							}
 						}												
-						echo " Cost: $wellbeing_api_cost_bracket Theme: $wellbeing_api_theme Days: $wellbeing_api_days_of_the_week " ;
-						echo "</pre>";
+						// echo " Cost: $wellbeing_api_cost_bracket Theme: $wellbeing_api_theme Days: $wellbeing_api_days_of_the_week " ;
+						// echo "</pre>";
 
 
 						// API themes
@@ -190,7 +189,7 @@ function live_well_importer_handle_post(){
 						$acf_posts = get_posts( array('post_title' => 'WebsiteUrl') ) ;
 						$acf_post = get_page_by_title( 'WebsiteUrl', OBJECT, 'acf-field' ) ;
 						$field_key = $acf_post->post_name;
-						echo " FIELD KEY: " . $field_key ;
+						// echo " FIELD KEY: " . $field_key ;
 						// update_field('field_5e418f9203cbd', $item["WebsiteUrl"], $postInsertId);
 						update_field( "$field_key", $item["WebsiteUrl"], $postInsertId);
 
@@ -199,7 +198,7 @@ function live_well_importer_handle_post(){
 						$acf_posts = get_posts( array('post_title' => 'Wellbeing-API-Cost-bracket') ) ;
 						$acf_post = get_page_by_title( 'Wellbeing-API-Cost-bracket', OBJECT, 'acf-field' ) ;
 						$field_key = $acf_post->post_name;
-						echo " FIELD KEY: " . $field_key ;
+						// echo " FIELD KEY: " . $field_key ;
 						// update_field('field_5e418f9203cbd', $item["Wellbeing-API-Cost-bracket"], $postInsertId);
 						$dummy = get_field('$field_key');
 						update_field( "$field_key", $wellbeing_api_cost_bracket, $postInsertId);
@@ -209,7 +208,7 @@ function live_well_importer_handle_post(){
 						$acf_posts = get_posts( array('post_title' => 'Wellbeing-API-theme') ) ;
 						$acf_post = get_page_by_title( 'Wellbeing-API-theme', OBJECT, 'acf-field' ) ;
 						$field_key = $acf_post->post_name;
-						echo " FIELD KEY: " . $field_key ;
+						// echo " FIELD KEY: " . $field_key ;
 						// update_field('field_5e418f9203cbd', $item["Wellbeing-API-theme"], $postInsertId);
 						update_field( "$field_key", $wellbeing_api_theme, $postInsertId);
 
@@ -218,7 +217,7 @@ function live_well_importer_handle_post(){
 						$acf_posts = get_posts( array('post_title' => 'Wellbeing-API-days-of-the-week') ) ;
 						$acf_post = get_page_by_title( 'Wellbeing-API-days-of-the-week', OBJECT, 'acf-field' ) ;
 						$field_key = $acf_post->post_name;
-						echo " FIELD KEY: " . $field_key ;
+						// echo " FIELD KEY: " . $field_key ;
 						// update_field('field_5e418f9203cbd', $item["Wellbeing-API-days-of-the-week"], $postInsertId);
 						update_field( "$field_key", $wellbeing_api_days_of_the_week, $postInsertId);
 
