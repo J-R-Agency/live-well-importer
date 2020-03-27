@@ -98,6 +98,9 @@ function live_well_importer_handle_post(){
 					$service = $data["Services"] ;
 					foreach( $service as $item ){ 
 
+						// Initialise
+						$wl_api_main_address = "" ;
+
 						print_r( $item["Name"] . " // " . $item["WebsiteUrl"] . " // " . $item["Organisation"] . " <br> " );
 						// echo "<pre>";
 						// print_r( $item["Locations"] );
@@ -134,9 +137,16 @@ function live_well_importer_handle_post(){
 							// echo " AI Field Values: ";
 							// print_r( $additionalfield["Values"] );
 							// echo implode(",", $additionalfield["Values"]);
-
+							 if ( $wl_api_main_address == "" ) {
+							 	$wl_api_main_address = $item["Name"] . ", " . $location["AddressLine1"] . ", " . $location["AddressLine2"] . ", " . $location["Postcode"] ;
+							 } else {
+							 	// Main address is already set for this entry
+							 }
 
 						}	
+
+						echo " Main Address: " . $wl_api_main_address ;
+
 
 						// API themes
 						$wl_api_theme = explode(",", $wellbeing_api_theme);
