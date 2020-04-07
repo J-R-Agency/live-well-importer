@@ -132,7 +132,7 @@ function live_well_importer_handle_post(){
 								$wellbeing_api_days_of_the_week = implode(",", $additionalfield["Values"]) ;
 							}else{
 								$new_ai_row .= "<dt>" . $additionalfield["Name"] . "</dt>" ;
-								$new_ai_row .= "<dd>" . implode( "<br>;", trim( $additionalfield["Values"] ) ) . "</dd>" ;
+								$new_ai_row .= "<dd>" . implode( "<br>;",  $additionalfield["Values"] ) . "</dd>" ;
 							}
 						}		
 						$new_ai_row .= "</dl>" ;
