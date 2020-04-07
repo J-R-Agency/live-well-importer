@@ -136,11 +136,11 @@ function live_well_importer_handle_post(){
 							}
 						}		
 						$new_ai_row .= "</dl>" ;
-
+/*
 						echo "<pre>";
 						print_r( $new_ai_row );
 						echo "</pre>";
-
+*/
 						// echo " Cost: $wellbeing_api_cost_bracket Theme: $wellbeing_api_theme Days: $wellbeing_api_days_of_the_week " ;
 						// echo "</pre>";
 
@@ -256,6 +256,16 @@ function live_well_importer_handle_post(){
 						// echo " FIELD KEY: " . $field_key ;
 						// update_field('field_5e418f9203cbd', $item["Wellbeing-API-days-of-the-week"], $postInsertId);
 						update_field( "$field_key", $wellbeing_api_days_of_the_week, $postInsertId);
+
+						// Additional Information Fields
+						$field_key = get_post_meta( $postInsertId, "_" . strtolower("additional_information"), true );
+						$acf_posts = get_posts( array('post_title' => 'Additional Information') ) ;
+						$acf_post = get_page_by_title( 'Additional Information', OBJECT, 'acf-field' ) ;
+						$field_key = $acf_post->post_name;
+						// echo " FIELD KEY: " . $field_key ;
+						// update_field('field_5e418f9203cbd', $item["Wellbeing-API-theme"], $postInsertId);
+						update_field( "$field_key", $new_ai_row, $postInsertId);
+
 
 						// Main Address custom field aggregated for Maps API etc.
 						$field_key = get_post_meta( $postInsertId, "_" . strtolower("Main_Address"), true );
