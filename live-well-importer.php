@@ -107,8 +107,16 @@ function live_well_importer_handle_post(){
 						// print_r( $item["Logo"] );
 						// print_r( $item["AdditionalInformationFields"] );
 						
-						$new_ai_row = "<dl>" ;
+						foreach ( $item["Documents"] as $document ){
 
+							echo "<pre>";
+							print_r ($document);
+							echo "</pre>";
+
+						}
+
+
+						$new_ai_row = "<dl>" ;
 						foreach ( $item["AdditionalInformationFields"] as $additionalfield ){
 							// echo " AI Field Name: ";
 							// print_r( $additionalfield["Name"] );
