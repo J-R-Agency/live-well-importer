@@ -115,7 +115,7 @@ function live_well_importer_handle_post(){
 							// echo implode(",", $additionalfield["Values"]);
 
 							$additionalfields[] .= "<h2>" . $additionalfield["Name"] . "</h2>" ;
-							$additionalfields[] .= "<p>" . $additionalfield["Values"] . "</p>" ;
+							$additionalfields[] .= "<p>" .  implode("<br>", $additionalfield["Values"]) . "</p>" ;
 
 							foreach ( $additionalfield["Values"] as $additionalfield_values ){
 								//print_r( $additionalfield_values["string"] );
