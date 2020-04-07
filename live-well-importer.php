@@ -302,12 +302,12 @@ function live_well_importer_handle_post(){
 						update_field( "$field_key", $wl_api_logo[1], $postInsertId);
 
 						// Activity Documents custom field aggregated for Maps API etc.
-						$field_key = get_post_meta( $postInsertId, "_" . strtolower("Main_Address"), true );
-						$acf_posts = get_posts( array('post_title' => 'Main Address') ) ;
-						$acf_post = get_page_by_title( 'Main Address', OBJECT, 'acf-field' ) ;
+						$field_key = get_post_meta( $postInsertId, "_" . strtolower("activity_documents"), true );
+						$acf_posts = get_posts( array('post_title' => 'Activity Documents') ) ;
+						$acf_post = get_page_by_title( 'Activity Documents', OBJECT, 'acf-field' ) ;
 						$field_key = $acf_post->post_name;
 						// echo " FIELD KEY: " . $field_key ;
-						update_field( "$field_key", $wl_api_main_address, $postInsertId);
+						update_field( "$field_key", $serialised_documents, $postInsertId);
 
 
 						// This is a little trick to "catch" the image id
