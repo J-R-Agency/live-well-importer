@@ -114,6 +114,9 @@ function live_well_importer_handle_post(){
 							// print_r( $additionalfield["Values"] );
 							// echo implode(",", $additionalfield["Values"]);
 
+							$additionalfields[] .= "<h2>" . $additionalfield["Name"] . "</h2>" ;
+							$additionalfields[] .= "<p>" . $additionalfield["Values"] . "</p>" ;
+
 							foreach ( $additionalfield["Values"] as $additionalfield_values ){
 								//print_r( $additionalfield_values["string"] );
 								//echo implode(",", $additionalfield_values["string"]);
@@ -127,7 +130,12 @@ function live_well_importer_handle_post(){
 							if ( $additionalfield["Name"] == "Wellbeing-API-days-of-the-week" ){
 								$wellbeing_api_days_of_the_week = implode(",", $additionalfield["Values"]) ;
 							}
-						}												
+						}		
+
+						echo "<pre>";
+						print_r($additionalfields);
+						echo "</pre>";
+
 						// echo " Cost: $wellbeing_api_cost_bracket Theme: $wellbeing_api_theme Days: $wellbeing_api_days_of_the_week " ;
 						// echo "</pre>";
 
