@@ -106,6 +106,8 @@ function live_well_importer_handle_post(){
 						// print_r( $item["Locations"] );
 						// print_r( $item["Logo"] );
 						// print_r( $item["AdditionalInformationFields"] );
+						
+						$new_ai_row = "<dl>" ;
 
 						foreach ( $item["AdditionalInformationFields"] as $additionalfield ){
 							// echo " AI Field Name: ";
@@ -114,26 +116,26 @@ function live_well_importer_handle_post(){
 							// print_r( $additionalfield["Values"] );
 							// echo implode(",", $additionalfield["Values"]);
 
+
+
+
 							foreach ( $additionalfield["Values"] as $additionalfield_values ){
 								//print_r( $additionalfield_values["string"] );
 								//echo implode(",", $additionalfield_values["string"]);
 							}
-
-							// Get custom WL API AI fields
-							if ( $additionalfield["Name"] == "Wellbeing-API-Cost-bracket" ) {
+							if ( $additionalfield["Name"] == "Wellbeing-API-Cost-bracket" ){
 								$wellbeing_api_cost_bracket = implode(",", $additionalfield["Values"]) ;
-							} elseif ( $additionalfield["Name"] == "Wellbeing-API-theme" ){
+							}elseif ( $additionalfield["Name"] == "Wellbeing-API-theme" ){
 								$wellbeing_api_theme = implode(",", $additionalfield["Values"]) ;
-							} elseif ( $additionalfield["Name"] == "Wellbeing-API-days-of-the-week" ){
+							}
+							elseif ( $additionalfield["Name"] == "Wellbeing-API-days-of-the-week" ){
 								$wellbeing_api_days_of_the_week = implode(",", $additionalfield["Values"]) ;
-							} else {
-								// Get remaining AI fields
-								$new_ai_row = "<dl>" ;
+							}else{
 								$new_ai_row .= "<dt>" . $additionalfield["Name"] . "</dt>" ;
 								$new_ai_row .= "<dd>" . implode("<br>", $additionalfield["Values"]) . "</dd>" ;
-								$new_ai_row .= "</dl>" ;
 							}
 						}		
+						$new_ai_row .= "</dl>" ;
 
 						echo "<pre>";
 						print_r( $new_ai_row );
