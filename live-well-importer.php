@@ -108,16 +108,15 @@ function live_well_importer_handle_post(){
 						// print_r( $item["AdditionalInformationFields"] );
 						
 						unset($activity_documents); // Initialise 
-
 						foreach ( $item["Documents"] as $document ){
-							$activity_documents[] = implode("|", $document);
 							$serialised_documents = serialize($document);
 						}
+						// print_r ($serialised_documents);
 
-						print_r ($activity_documents);
-
-						print_r ($serialised_documents);
-
+						unset($activity_images); // Initialise 
+						foreach ( $item["Images"] as $image ){
+							$serialised_images = serialize($image);
+						}
 
 						$new_ai_row = "<dl>" ;
 						foreach ( $item["AdditionalInformationFields"] as $additionalfield ){
@@ -309,6 +308,13 @@ function live_well_importer_handle_post(){
 						// echo " FIELD KEY: " . $field_key ;
 						update_field( "$field_key", $serialised_documents, $postInsertId);
 
+						// Activity Images custom field aggregated for Maps API etc.
+						$field_key = get_post_meta( $postInsertId, "_" . strtolower("activity_images"), true );
+						$acf_posts = get_posts( array('post_title' => 'Activity Images') ) ;
+						$acf_post = get_page_by_title( 'Activity Images', OBJECT, 'acf-field' ) ;
+						$field_key = $acf_post->post_name;
+						// echo " FIELD KEY: " . $field_key ;
+						update_field( "$field_key", $serialised_images, $postInsertId);
 
 						// This is a little trick to "catch" the image id
 						// Attach/upload the "sideloaded" image
