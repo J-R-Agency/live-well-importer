@@ -114,6 +114,7 @@ function live_well_importer_handle_post(){
 							print_r ($document["Summary"]);
 							print_r ($document["Title"]);
 							print_r ($document["Url"]);
+							echo " FULL: " . implode("|", $document);
 							echo "</pre>";
 
 						}
