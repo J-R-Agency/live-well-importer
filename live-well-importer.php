@@ -110,10 +110,15 @@ function live_well_importer_handle_post(){
 						foreach ( $item["Documents"] as $document ){
 
 							echo "<pre>";
-							print_r ($document);
+							print_r ($document["ContentType"]);
+							print_r ($document["Summary"]);
+							print_r ($document["Title"]);
+							print_r ($document["Url"]);
 							echo "</pre>";
 
 						}
+
+
 
 
 						$new_ai_row = "<dl>" ;
