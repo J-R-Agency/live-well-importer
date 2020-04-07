@@ -107,19 +107,16 @@ function live_well_importer_handle_post(){
 						// print_r( $item["Logo"] );
 						// print_r( $item["AdditionalInformationFields"] );
 						
+						unset($activity_documents); // Initialise 
+
 						foreach ( $item["Documents"] as $document ){
-
-							echo "<pre>";
-							print_r ($document["ContentType"]);
-							print_r ($document["Summary"]);
-							print_r ($document["Title"]);
-							print_r ($document["Url"]);
-							echo " FULL: " . implode("|", $document);
-							echo "</pre>";
-
+							$activity_documents[] = implode("|", $document);
+							$serialised_documents = serialize($document);
 						}
 
+						print_r ($activity_documents);
 
+						print_r ($serialised_documents);
 
 
 						$new_ai_row = "<dl>" ;
@@ -303,6 +300,14 @@ function live_well_importer_handle_post(){
 						$field_key = $acf_post->post_name;
 						// echo " FIELD KEY: " . $field_key ;
 						update_field( "$field_key", $wl_api_logo[1], $postInsertId);
+
+						// Activity Documents custom field aggregated for Maps API etc.
+						$field_key = get_post_meta( $postInsertId, "_" . strtolower("Main_Address"), true );
+						$acf_posts = get_posts( array('post_title' => 'Main Address') ) ;
+						$acf_post = get_page_by_title( 'Main Address', OBJECT, 'acf-field' ) ;
+						$field_key = $acf_post->post_name;
+						// echo " FIELD KEY: " . $field_key ;
+						update_field( "$field_key", $wl_api_main_address, $postInsertId);
 
 
 						// This is a little trick to "catch" the image id
