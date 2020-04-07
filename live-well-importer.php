@@ -114,8 +114,11 @@ function live_well_importer_handle_post(){
 							// print_r( $additionalfield["Values"] );
 							// echo implode(",", $additionalfield["Values"]);
 
-							$additionalfields[] .= "<h2>" . $additionalfield["Name"] . "</h2>" ;
-							$additionalfields[] .= "<p>" .  implode("<br>", $additionalfield["Values"]) . "</p>" ;
+							$new_ai_row = "<dl>" ;
+							$new_ai_row .= "<dt>" . $additionalfield["Name"] . "</dt>" ;
+							$new_ai_row .= "<dd>" . implode("<br>", $additionalfield["Values"]) . "</dd>" ;
+							$new_ai_row .= "</dl>" ;
+
 
 							foreach ( $additionalfield["Values"] as $additionalfield_values ){
 								//print_r( $additionalfield_values["string"] );
@@ -133,7 +136,7 @@ function live_well_importer_handle_post(){
 						}		
 
 						echo "<pre>";
-						print_r($additionalfields);
+						print_r( $new_ai_row );
 						echo "</pre>";
 
 						// echo " Cost: $wellbeing_api_cost_bracket Theme: $wellbeing_api_theme Days: $wellbeing_api_days_of_the_week " ;
