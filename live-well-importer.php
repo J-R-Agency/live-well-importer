@@ -112,6 +112,9 @@ function live_well_importer_handle_post(){
 						$serialised_images = serialize($item["Images"]);
 
 						$serialised_contacts = serialize($item["Contacts"]);
+						echo "<pre>";
+						print_r($item["Contacts"]);
+						echo "</pre>";
 
 						$new_ai_row = "<dl>" ;
 						foreach ( $item["AdditionalInformationFields"] as $additionalfield ){
