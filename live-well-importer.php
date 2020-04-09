@@ -106,22 +106,12 @@ function live_well_importer_handle_post(){
 						// print_r( $item["Locations"] );
 						// print_r( $item["Logo"] );
 						// print_r( $item["AdditionalInformationFields"] );
-						
-						unset($activity_documents); // Initialise 
-						foreach ( $item["Documents"] as $document ){
-							$serialised_documents = serialize($document);
-						}
 
 						$serialised_documents = serialize($item["Documents"]);
-
-						// print_r ($serialised_documents);
-
-						unset($activity_images); // Initialise 
-						foreach ( $item["Images"] as $image ){
-							$serialised_images = serialize($image);
-						}
 						
 						$serialised_images = serialize($item["Images"]);
+
+						$serialised_contacts = serialize($item["Contacts"]);
 
 						$new_ai_row = "<dl>" ;
 						foreach ( $item["AdditionalInformationFields"] as $additionalfield ){
@@ -320,6 +310,14 @@ function live_well_importer_handle_post(){
 						$field_key = $acf_post->post_name;
 						// echo " FIELD KEY: " . $field_key ;
 						update_field( "$field_key", $serialised_images, $postInsertId);
+
+						// Activity Images custom field aggregated for Maps API etc.
+						$field_key = get_post_meta( $postInsertId, "_" . strtolower("contacts"), true );
+						$acf_posts = get_posts( array('post_title' => 'Contacts') ) ;
+						$acf_post = get_page_by_title( 'Contacts', OBJECT, 'acf-field' ) ;
+						$field_key = $acf_post->post_name;
+						// echo " FIELD KEY: " . $field_key ;
+						update_field( "$field_key", $serialised_contacts, $postInsertId);
 
 						// This is a little trick to "catch" the image id
 						// Attach/upload the "sideloaded" image
