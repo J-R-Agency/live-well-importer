@@ -111,6 +111,9 @@ function live_well_importer_handle_post(){
 						foreach ( $item["Documents"] as $document ){
 							$serialised_documents = serialize($document);
 						}
+						
+						$serialised_documents = serialize($item["Documents"]);
+
 						// print_r ($serialised_documents);
 
 						unset($activity_images); // Initialise 
