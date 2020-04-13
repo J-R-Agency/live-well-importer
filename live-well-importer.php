@@ -100,6 +100,7 @@ function live_well_importer_handle_post(){
 
 						// Initialise
 						$wl_api_main_address = "" ;
+						$wl_api_postcode = "" ;
 
 						print_r( $item["Name"] . " // " . $item["WebsiteUrl"] . " // " . $item["Organisation"] . " <br> " );
 						// echo "<pre>";
@@ -113,7 +114,7 @@ function live_well_importer_handle_post(){
 
 						$serialised_contacts = serialize($item["Contacts"]);
 
-
+						// Handle Additional Information (AU) Fields
 						$new_ai_row = "<dl>" ;
 						foreach ( $item["AdditionalInformationFields"] as $additionalfield ){
 							// echo " AI Field Name: ";
@@ -150,6 +151,8 @@ function live_well_importer_handle_post(){
 						// echo " Cost: $wellbeing_api_cost_bracket Theme: $wellbeing_api_theme Days: $wellbeing_api_days_of_the_week " ;
 						// echo "</pre>";
 
+
+						// Handle all location, address and postcode fields
 						foreach ( $item["Locations"] as $location ){
 							// echo " Locations: ";
 							// print_r( $location );
@@ -158,6 +161,13 @@ function live_well_importer_handle_post(){
 							// echo implode(",", $additionalfield["Values"]);
 							 if ( $wl_api_main_address == "" ) {
 							 	$wl_api_main_address = $item["Name"] . ", " . $location["AddressLine1"] . ", " . $location["AddressLine2"] . ", " . $location["Postcode"] ;
+							 	if ( $location["Postcode"] != "" ) {
+							 		$wl_api_postcode_parts = explode(" ", $location["Postcode"] ) ;
+							 		if ( $wl_api_postcode_parts[0] != "" ) {
+										$wl_api_postcode = $wl_api_postcode_parts[0] ;
+							 		}
+							 	}
+
 							 } else {
 							 	// Main address is already set for this entry
 							 	// echo " Main Address: " . $wl_api_main_address . " | " ;
@@ -165,6 +175,8 @@ function live_well_importer_handle_post(){
 
 						}	
 
+
+						// Handle all logo fields
 						unset( $wl_api_logo );
 						
 						foreach ( $item["Logo"] as $logo ){
@@ -201,6 +213,7 @@ function live_well_importer_handle_post(){
 						}
 
 
+						// Create and import filter fields as taxonomies
 						//add_action( 'save_post', 'wl_api_create_taxonomies', 20, 2 );
 						//Reformat values
 						$wl_api_theme = str_replace ( "WL", "", $wellbeing_api_theme ) ;
@@ -221,6 +234,9 @@ function live_well_importer_handle_post(){
 						$wl_api_days_of_the_week = str_replace( "WLSaturday", "Saturday", $wl_api_days_of_the_week ) ;
 						$wl_api_days_of_the_week = str_replace( "WLSunday", "Sunday", $wl_api_days_of_the_week ) ;
 						wl_api_create_taxonomies ( $postInsertId, $wl_api_days_of_the_week, "days" ) ;
+
+						wl_api_create_taxonomies ( $postInsertId, $wl_api_postcode, "postcodes" ) ;
+
 
 						/* UPDATE CUSTOM FIELDS */
 						// WARNING FIELD NEEDS TO EXIST AND HAVE DATA BEFORE WE CAN ADD TO IT
