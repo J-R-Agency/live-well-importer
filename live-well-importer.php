@@ -46,9 +46,25 @@ function wl_api_create_taxonomies($postInsertId, $wl_api_terms, $wl_api_taxonomy
 function live_well_importer_handle_post(){
         // First check if the file appears on the _FILES array
         if(isset($_POST['api_url'])){
+                
+
+        	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLActive"
+        	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLCalm"
+        	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLCreative"
+        	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLSocial"
+        	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLUseful"
+
+
+        	foreach ($api_data as $api_url) {
+        		echo = $api_url . "<br>";
+        	}
+
+
                 $api_url = $_POST['api_url'];
  
                 echo $api_url;
+
+
 
 				// Disable a time limit
 				set_time_limit(0);
