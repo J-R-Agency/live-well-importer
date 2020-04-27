@@ -55,9 +55,12 @@ function live_well_importer_handle_post(){
         	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLUseful";
 
 
-        	foreach ($api_data as $api_url) {
-        		echo $api_url . "<br>";
-        	}
+
+        	var_dump($api_data);
+        	
+        	// foreach ($api_data as $api_url) {
+        	// 	echo $api_url . "<br>";
+        	// }
 
 
                 $api_url = $_POST['api_url'];
