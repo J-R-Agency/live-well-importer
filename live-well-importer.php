@@ -55,7 +55,7 @@ function live_well_importer_handle_post(){
     	// $api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLUseful";
 
     	$reset_data = $_POST['reset_data']; 
-    	
+
     	if ( $reset_data ){
     		$live_well_importer_start = 1 ;
     	}
@@ -98,6 +98,8 @@ function live_well_importer_handle_post(){
 
 				    if ( $live_well_importer_start ) {
 
+						echo "Reset data";
+
 						// First remove all previous imported posts
 						$currentPosts = get_posts( array( 
 							'post_type' 		=> 'activities', // Or "page" or some custom post type
@@ -120,7 +122,9 @@ function live_well_importer_handle_post(){
 							wp_delete_post( $post->ID, true);
 						}
 
-					}	
+					} else {
+						echo "Don't reset data";
+					}
 					// Loop through some items in the xml 
 					$service = $data["Services"] ;
 					foreach( $service as $item ){ 
