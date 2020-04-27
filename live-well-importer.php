@@ -25,7 +25,7 @@ function live_well_importer_init(){
         <!-- Form to handle the upload - The enctype value here is very important -->
         <form  method=\"post\" enctype=\"multipart/form-data\">
                 <input type=\"text\" id=\"api_url\" name=\"api_url\" value=\"https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLActive\" size=\"100\"></input>
-				<input type=\"checkbox\" id=\"reset_data\" name=\"reset_data\" value=\"1\"> Reset Data?";
+				<input type=\"checkbox\" id=\"reset_data\" name=\"reset_data\" value=\"1\"> <label for=\"reset_data\">Reset Data?</label>";
         		submit_button('Import');
         echo "</form>";
 }
