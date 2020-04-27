@@ -62,7 +62,7 @@ function live_well_importer_handle_post(){
         	foreach ($api_data as $api_url_value) {
 
         		echo "<h2>" . $api_url_value . "</h2>";
-        		 exit;
+
 
 
                 // $api_url = $_POST['api_url'];
@@ -70,7 +70,7 @@ function live_well_importer_handle_post(){
  
                 echo $api_url;
 
-
+        		 exit;
 
 				// Disable a time limit
 				set_time_limit(0);
