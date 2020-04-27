@@ -49,9 +49,9 @@ function live_well_importer_handle_post(){
 
     	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLActive";
     	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLCalm";
-    	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLCreative";
-    	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLSocial";
-    	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLUseful";
+    	// $api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLCreative";
+    	// $api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLSocial";
+    	// $api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLUseful";
 
     	$live_well_importer_start = 1 ;
 
@@ -62,7 +62,7 @@ function live_well_importer_handle_post(){
         	foreach ($api_data as $api_url_value) {
 
         		echo "<h2>" . $api_url_value . "</h2>";
-
+        		 exit;
 
 
                 // $api_url = $_POST['api_url'];
