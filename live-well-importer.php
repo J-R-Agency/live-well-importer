@@ -55,7 +55,6 @@ function live_well_importer_handle_post(){
 
     	$live_well_importer_start = 1 ;
 
-        
         if(isset($_POST['api_url'])){
 
 
@@ -64,13 +63,11 @@ function live_well_importer_handle_post(){
         		echo "<h2>" . $api_url_value . "</h2>";
 
 
-
                 // $api_url = $_POST['api_url'];
                 $api_url = $api_url_value;
  
                 echo $api_url;
 
-        		 exit;
 
 				// Disable a time limit
 				set_time_limit(0);
