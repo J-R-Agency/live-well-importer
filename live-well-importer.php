@@ -24,7 +24,8 @@ function live_well_importer_init(){
         <h2>Import data from Live Well API (please use Live Well API URL)</h2>
         <!-- Form to handle the upload - The enctype value here is very important -->
         <form  method=\"post\" enctype=\"multipart/form-data\">
-                <input type=\"text\" id=\"api_url\" name=\"api_url\" value=\"https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLActive\" size=\"100\"></input>";
+                <input type=\"text\" id=\"api_url\" name=\"api_url\" value=\"https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLActive\" size=\"100\"></input>
+				<input type=\"checkbox\" id=\"reset_data\" name=\"reset_data\" value=\"1\"> Reset Data?";
         		submit_button('Import');
         echo "</form>";
 }
@@ -48,12 +49,16 @@ function live_well_importer_handle_post(){
 
 
     	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLActive";
-    	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLCalm";
+    	// $api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLCalm";
     	// $api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLCreative";
     	// $api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLSocial";
     	// $api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLUseful";
 
-    	$live_well_importer_start = 1 ;
+    	$reset_data = $_POST['reset_data']; 
+    	
+    	if ( $reset_data ){
+    		$live_well_importer_start = 1 ;
+    	}
 
         if(isset($_POST['api_url'])){
 
