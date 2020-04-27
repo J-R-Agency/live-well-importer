@@ -24,8 +24,7 @@ function live_well_importer_init(){
         <h2>Import data from Live Well API (please use Live Well API URL)</h2>
         <!-- Form to handle the upload - The enctype value here is very important -->
         <form  method=\"post\" enctype=\"multipart/form-data\">
-                <input type=\"text\" id=\"api_url\" name=\"api_url\" value=\"https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLActive\" size=\"100\"></input>
-				<input type=\"checkbox\" id=\"reset_data\" name=\"reset_data\" value=\"1\"> <label for=\"reset_data\">Reset Data?</label>";
+                <input type=\"text\" id=\"api_url\" name=\"api_url\" value=\"https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLActive\" size=\"100\"></input>";
         		submit_button('Import');
         echo "</form>";
 }
@@ -46,33 +45,10 @@ function wl_api_create_taxonomies($postInsertId, $wl_api_terms, $wl_api_taxonomy
 
 function live_well_importer_handle_post(){
         // First check if the file appears on the _FILES array
-
-
-    	// $api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLActive";
-    	// $api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLCalm";
-    	// $api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLCreative";
-    	// $api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLSocial";
-    	// $api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLUseful";
-
-    	$reset_data = $_POST['reset_data']; 
-
-    	if ( $reset_data ){
-    		$live_well_importer_start = 1 ;
-    	}
-
         if(isset($_POST['api_url'])){
-
-
-        	// foreach ($api_data as $api_url_value) {
-
-        		echo "<h2>" . $_POST['api_url'] . "</h2>";
-
-
-                // $api_url = $_POST['api_url'];
                 $api_url = $_POST['api_url'];
  
                 echo $api_url;
-
 
 				// Disable a time limit
 				set_time_limit(0);
@@ -96,35 +72,28 @@ function live_well_importer_handle_post(){
 				    echo "<pre>";*/
 
 
-				    if ( $live_well_importer_start ) {
+					// First remove all previous imported posts
+					$currentPosts = get_posts( array( 
+						'post_type' 		=> 'activities', // Or "page" or some custom post type
+						'post_status' 		=> 'publish',
+						'meta_key'			=> 'imported', // Our post options to determined
+						'posts_per_page'   	=> 1000 // Just to make sure we've got all our posts, the default is just 5
+					) );
 
-						echo "Reset data";
+					// Loop through them
+					foreach($currentPosts as $post){
 
-						// First remove all previous imported posts
-						$currentPosts = get_posts( array( 
-							'post_type' 		=> 'activities', // Or "page" or some custom post type
-							'post_status' 		=> 'publish',
-							'meta_key'			=> 'imported', // Our post options to determined
-							'posts_per_page'   	=> 1000 // Just to make sure we've got all our posts, the default is just 5
-						) );
+						// Get the featured image id
+						if($thumbId = get_post_meta($post->ID,'_thumbnail_id',true)){
 
-						// Loop through them
-						foreach($currentPosts as $post){
-
-							// Get the featured image id
-							if($thumbId = get_post_meta($post->ID,'_thumbnail_id',true)){
-
-								// Remove the featured image
-								wp_delete_attachment($thumbId,true);
-							}
-
-							// Remove the post
-							wp_delete_post( $post->ID, true);
+							// Remove the featured image
+							wp_delete_attachment($thumbId,true);
 						}
 
-					} else {
-						echo "Don't reset data";
+						// Remove the post
+						wp_delete_post( $post->ID, true);
 					}
+
 					// Loop through some items in the xml 
 					$service = $data["Services"] ;
 					foreach( $service as $item ){ 
@@ -373,15 +342,12 @@ function live_well_importer_handle_post(){
 						// add_action('add_attachment','featuredImageTrick');
 						// media_sideload_image($item->image, $postInsertId, $item->title);
 						// remove_action('add_attachment','featuredImageTrick');
-
-						$live_well_importer_start = 1;
 					}
 
 				} else {
 					echo " Not DATA ";
 				}
- 			
- 			// } // MAIN API URL FOR LOOP
+ 
  
         }
 }
