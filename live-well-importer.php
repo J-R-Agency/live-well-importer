@@ -53,6 +53,8 @@ function live_well_importer_handle_post(){
     	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLSocial";
     	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLUseful";
 
+    	$live_well_importer_start = 1 ;
+
         
         if(isset($_POST['api_url'])){
 
@@ -92,28 +94,31 @@ function live_well_importer_handle_post(){
 				    echo "<pre>";*/
 
 
-					// First remove all previous imported posts
-					$currentPosts = get_posts( array( 
-						'post_type' 		=> 'activities', // Or "page" or some custom post type
-						'post_status' 		=> 'publish',
-						'meta_key'			=> 'imported', // Our post options to determined
-						'posts_per_page'   	=> 1000 // Just to make sure we've got all our posts, the default is just 5
-					) );
+				    if ( $live_well_importer_start ) {
 
-					// Loop through them
-					foreach($currentPosts as $post){
+						// First remove all previous imported posts
+						$currentPosts = get_posts( array( 
+							'post_type' 		=> 'activities', // Or "page" or some custom post type
+							'post_status' 		=> 'publish',
+							'meta_key'			=> 'imported', // Our post options to determined
+							'posts_per_page'   	=> 1000 // Just to make sure we've got all our posts, the default is just 5
+						) );
 
-						// Get the featured image id
-						if($thumbId = get_post_meta($post->ID,'_thumbnail_id',true)){
+						// Loop through them
+						foreach($currentPosts as $post){
 
-							// Remove the featured image
-							wp_delete_attachment($thumbId,true);
+							// Get the featured image id
+							if($thumbId = get_post_meta($post->ID,'_thumbnail_id',true)){
+
+								// Remove the featured image
+								wp_delete_attachment($thumbId,true);
+							}
+
+							// Remove the post
+							wp_delete_post( $post->ID, true);
 						}
 
-						// Remove the post
-						wp_delete_post( $post->ID, true);
-					}
-
+					}	
 					// Loop through some items in the xml 
 					$service = $data["Services"] ;
 					foreach( $service as $item ){ 
@@ -362,6 +367,8 @@ function live_well_importer_handle_post(){
 						// add_action('add_attachment','featuredImageTrick');
 						// media_sideload_image($item->image, $postInsertId, $item->title);
 						// remove_action('add_attachment','featuredImageTrick');
+
+						$live_well_importer_start = 1;
 					}
 
 				} else {
