@@ -48,11 +48,11 @@ function live_well_importer_handle_post(){
         if(isset($_POST['api_url'])){
                 
 
-        	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLActive"
-        	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLCalm"
-        	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLCreative"
-        	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLSocial"
-        	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLUseful"
+        	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLActive";
+        	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLCalm";
+        	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLCreative";
+        	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLSocial";
+        	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLUseful";
 
 
         	foreach ($api_data as $api_url) {
