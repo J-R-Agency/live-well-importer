@@ -48,7 +48,7 @@ function live_well_importer_handle_post(){
         // First check if the file appears on the _FILES array
 
 
-    	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLActive";
+    	// $api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLActive";
     	// $api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLCalm";
     	// $api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLCreative";
     	// $api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLSocial";
@@ -63,13 +63,13 @@ function live_well_importer_handle_post(){
         if(isset($_POST['api_url'])){
 
 
-        	foreach ($api_data as $api_url_value) {
+        	// foreach ($api_data as $api_url_value) {
 
-        		echo "<h2>" . $api_url_value . "</h2>";
+        		echo "<h2>" . $_POST['api_url'] . "</h2>";
 
 
                 // $api_url = $_POST['api_url'];
-                $api_url = $api_url_value;
+                $api_url = $_POST['api_url'];
  
                 echo $api_url;
 
@@ -381,7 +381,7 @@ function live_well_importer_handle_post(){
 					echo " Not DATA ";
 				}
  			
- 			} // MAIN API URL FOR LOOP
+ 			// } // MAIN API URL FOR LOOP
  
         }
 }
