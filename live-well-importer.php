@@ -57,9 +57,9 @@ function live_well_importer_handle_post(){
 
 
         	var_dump($api_data);
-        	
-        	foreach ($api_data as $api_url) {
-        		echo $api_url . "<br>";
+
+        	foreach ($api_data as $api_url_value) {
+        		echo $api_url_value . "<br>";
         	}
 
 
