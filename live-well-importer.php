@@ -45,31 +45,26 @@ function wl_api_create_taxonomies($postInsertId, $wl_api_terms, $wl_api_taxonomy
 
 function live_well_importer_handle_post(){
         // First check if the file appears on the _FILES array
-                        
-
-        	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLActive";
-        	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLCalm";
-        	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLCreative";
-        	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLSocial";
-        	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLUseful";
 
 
+    	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLActive";
+    	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLCalm";
+    	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLCreative";
+    	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLSocial";
+    	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLUseful";
 
-        	var_dump($api_data);
+        
+        if(isset($_POST['api_url'])){
+
 
         	foreach ($api_data as $api_url_value) {
-        		echo $api_url_value . "<br>";
-        	}
 
-
-        if(isset($_POST['api_ufffrl'])){
+        		echo "<h2>" . $api_url_value . "</h2>";
 
 
 
-
-
-
-                $api_url = $_POST['api_url'];
+                // $api_url = $_POST['api_url'];
+                $api_url = $api_url_value;
  
                 echo $api_url;
 
@@ -372,7 +367,8 @@ function live_well_importer_handle_post(){
 				} else {
 					echo " Not DATA ";
 				}
- 
+ 			
+ 			} // MAIN API URL FOR LOOP
  
         }
 }
