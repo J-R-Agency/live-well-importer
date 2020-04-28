@@ -74,6 +74,11 @@ function live_well_importer_handle_post(){
 				require_once(ABSPATH . 'wp-admin/includes/file.php');
 				require_once(ABSPATH . 'wp-admin/includes/image.php');
 
+
+
+			foreach ($api_data as $api_url) {
+				# code...
+
 			    $json_data = file_get_contents($api_url);  
 			    //convert json object to php associative array
 			    $data = json_decode($json_data, true);
@@ -387,6 +392,7 @@ function live_well_importer_handle_post(){
 					echo " Not DATA ";
 				}
  
+ 			}
  
         }
 }
