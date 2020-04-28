@@ -75,7 +75,7 @@ function live_well_importer_handle_post(){
 			foreach ($api_data as $api_url) {
 				# code...
 
-				echo "<h1>" . $api_url . "</h1>" ;
+				echo "<h2>" . $api_url . "</h2>" ;
 
 			    $json_data = file_get_contents($api_url);  
 			    //convert json object to php associative array
