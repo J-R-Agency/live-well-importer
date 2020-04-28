@@ -397,6 +397,7 @@ function live_well_importer_handle_post(){
  			}
  
         }
+        echo "<h2>FINISHED</h2>";
 }
 
 ?>
