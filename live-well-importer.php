@@ -216,168 +216,171 @@ function live_well_importer_handle_post(){
 	
 						);
 
-
-
-						$title_to_check =  $postCreated["post_title"] ;
-
-
 						if ( get_page_by_title( $postCreated["post_title"], OBJECT, "activities" ) == null ) {
 
-							echo "<br> NO POST TITLE FOUND IN DB: DOES NOT ALREADY EXIST";
+							echo "<br> INSERT ACTIVITY ";
+
+
+
+
+								// Get the increment id from the inserted post
+								$postInsertId = wp_insert_post( $postCreated );
+
+								// Our custom post options, for now only some meta's for the
+								// Yoast SEO plugin and a "flag" to determined if a
+								// post was imported or not
+								$postOptions = array(
+									'imported'				=> true
+								);
+
+								// Loop through the post options
+								foreach($postOptions as $key=>$value){
+
+									// Add the post options
+									update_post_meta($postInsertId,$key,$value);
+								}
+
+
+								// Create and import filter fields as taxonomies
+								//add_action( 'save_post', 'wl_api_create_taxonomies', 20, 2 );
+								//Reformat values
+								$wl_api_theme = str_replace ( "WL", "", $wellbeing_api_theme ) ;
+								wl_api_create_taxonomies ( $postInsertId, $wl_api_theme, "themes" ) ;
+
+
+								$wl_api_cost_bracket = str_replace ( "WLFREE", "Free", $wellbeing_api_cost_bracket ) ;
+								$wl_api_cost_bracket = str_replace ( "WLLowCost", "£", $wl_api_cost_bracket ) ;
+								$wl_api_cost_bracket = str_replace ( "WLMidCost", "££", $wl_api_cost_bracket ) ;
+								$wl_api_cost_bracket = str_replace ( "WLHighCost", "£££", $wl_api_cost_bracket ) ;
+								wl_api_create_taxonomies ( $postInsertId, $wl_api_cost_bracket, "costs" ) ;
+
+								$wl_api_days_of_the_week = str_replace( "WLMonday", "Monday", $wellbeing_api_days_of_the_week ) ;
+								$wl_api_days_of_the_week = str_replace( "WLTuesday", "Tuesday", $wl_api_days_of_the_week ) ;
+								$wl_api_days_of_the_week = str_replace( "WLWednesday", "Wednesday", $wl_api_days_of_the_week ) ;
+								$wl_api_days_of_the_week = str_replace( "WLThursday", "Thursday", $wl_api_days_of_the_week ) ;
+								$wl_api_days_of_the_week = str_replace( "WLFriday", "Friday", $wl_api_days_of_the_week ) ;
+								$wl_api_days_of_the_week = str_replace( "WLSaturday", "Saturday", $wl_api_days_of_the_week ) ;
+								$wl_api_days_of_the_week = str_replace( "WLSunday", "Sunday", $wl_api_days_of_the_week ) ;
+								wl_api_create_taxonomies ( $postInsertId, $wl_api_days_of_the_week, "days" ) ;
+
+								wl_api_create_taxonomies ( $postInsertId, $wl_api_postcode, "postcodes" ) ;
+
+
+								/* UPDATE CUSTOM FIELDS */
+								// WARNING FIELD NEEDS TO EXIST AND HAVE DATA BEFORE WE CAN ADD TO IT
+								// AND WE NEED TO USE THE FIELD KEY FROM POST META TABLE
+
+								// WebsiteURL
+								$field_key = get_post_meta( $postInsertId, "_" . strtolower("WebsiteUrl"), true );
+								$acf_posts = get_posts( array('post_title' => 'WebsiteUrl') ) ;
+								$acf_post = get_page_by_title( 'WebsiteUrl', OBJECT, 'acf-field' ) ;
+								$field_key = $acf_post->post_name;
+								// echo " FIELD KEY: " . $field_key ;
+								// update_field('field_5e418f9203cbd', $item["WebsiteUrl"], $postInsertId);
+								update_field( "$field_key", $item["WebsiteUrl"], $postInsertId);
+
+								// Wellbeing-API-Cost-bracket
+								$field_key = get_post_meta( $postInsertId, "_" . strtolower("Wellbeing-API-Cost-bracket"), true );
+								$acf_posts = get_posts( array('post_title' => 'Wellbeing-API-Cost-bracket') ) ;
+								$acf_post = get_page_by_title( 'Wellbeing-API-Cost-bracket', OBJECT, 'acf-field' ) ;
+								$field_key = $acf_post->post_name;
+								// echo " FIELD KEY: " . $field_key ;
+								// update_field('field_5e418f9203cbd', $item["Wellbeing-API-Cost-bracket"], $postInsertId);
+								$dummy = get_field('$field_key');
+								update_field( "$field_key", $wellbeing_api_cost_bracket, $postInsertId);
+
+								// Wellbeing-API-theme
+								$field_key = get_post_meta( $postInsertId, "_" . strtolower("Wellbeing-API-theme"), true );
+								$acf_posts = get_posts( array('post_title' => 'Wellbeing-API-theme') ) ;
+								$acf_post = get_page_by_title( 'Wellbeing-API-theme', OBJECT, 'acf-field' ) ;
+								$field_key = $acf_post->post_name;
+								// echo " FIELD KEY: " . $field_key ;
+								// update_field('field_5e418f9203cbd', $item["Wellbeing-API-theme"], $postInsertId);
+								update_field( "$field_key", $wellbeing_api_theme, $postInsertId);
+
+								// Wellbeing-API-days-of-the-week
+								$field_key = get_post_meta( $postInsertId, "_" . strtolower("Wellbeing-API-days-of-the-week"), true );
+								$acf_posts = get_posts( array('post_title' => 'Wellbeing-API-days-of-the-week') ) ;
+								$acf_post = get_page_by_title( 'Wellbeing-API-days-of-the-week', OBJECT, 'acf-field' ) ;
+								$field_key = $acf_post->post_name;
+								// echo " FIELD KEY: " . $field_key ;
+								// update_field('field_5e418f9203cbd', $item["Wellbeing-API-days-of-the-week"], $postInsertId);
+								update_field( "$field_key", $wellbeing_api_days_of_the_week, $postInsertId);
+
+								// Additional Information Fields
+								$field_key = get_post_meta( $postInsertId, "_" . strtolower("additional_information"), true );
+								$acf_posts = get_posts( array('post_title' => 'Additional Information') ) ;
+								$acf_post = get_page_by_title( 'Additional Information', OBJECT, 'acf-field' ) ;
+								$field_key = $acf_post->post_name;
+								// echo " FIELD KEY: " . $field_key ;
+								// update_field('field_5e418f9203cbd', $item["Wellbeing-API-theme"], $postInsertId);
+								update_field( "$field_key", $new_ai_row, $postInsertId);
+
+
+								// Main Address custom field aggregated for Maps API etc.
+								$field_key = get_post_meta( $postInsertId, "_" . strtolower("Main_Address"), true );
+								$acf_posts = get_posts( array('post_title' => 'Main Address') ) ;
+								$acf_post = get_page_by_title( 'Main Address', OBJECT, 'acf-field' ) ;
+								$field_key = $acf_post->post_name;
+								// echo " FIELD KEY: " . $field_key ;
+								update_field( "$field_key", $wl_api_main_address, $postInsertId);
+
+								// Logo fields
+								$field_key = get_post_meta( $postInsertId, "_" . strtolower("Logo_Description"), true );
+								$acf_posts = get_posts( array('post_title' => 'Logo Description') ) ;
+								$acf_post = get_page_by_title( 'Logo Description', OBJECT, 'acf-field' ) ;
+								$field_key = $acf_post->post_name;
+								// echo " FIELD KEY: " . $field_key ;
+								update_field( "$field_key", $wl_api_logo[0], $postInsertId);
+
+								$field_key = get_post_meta( $postInsertId, "_" . strtolower("Logo_Url"), true );
+								$acf_posts = get_posts( array('post_title' => 'Logo URL') ) ;
+								$acf_post = get_page_by_title( 'Logo URL', OBJECT, 'acf-field' ) ;
+								$field_key = $acf_post->post_name;
+								// echo " FIELD KEY: " . $field_key ;
+								update_field( "$field_key", $wl_api_logo[1], $postInsertId);
+
+								// Activity Documents custom field aggregated for Maps API etc.
+								$field_key = get_post_meta( $postInsertId, "_" . strtolower("activity_documents"), true );
+								$acf_posts = get_posts( array('post_title' => 'Activity Documents') ) ;
+								$acf_post = get_page_by_title( 'Activity Documents', OBJECT, 'acf-field' ) ;
+								$field_key = $acf_post->post_name;
+								// echo " FIELD KEY: " . $field_key ;
+								update_field( "$field_key", $serialised_documents, $postInsertId);
+
+								// Activity Images custom field aggregated for Maps API etc.
+								$field_key = get_post_meta( $postInsertId, "_" . strtolower("activity_images"), true );
+								$acf_posts = get_posts( array('post_title' => 'Activity Images') ) ;
+								$acf_post = get_page_by_title( 'Activity Images', OBJECT, 'acf-field' ) ;
+								$field_key = $acf_post->post_name;
+								// echo " FIELD KEY: " . $field_key ;
+								update_field( "$field_key", $serialised_images, $postInsertId);
+
+								// Activity Images custom field aggregated for Maps API etc.
+								$field_key = get_post_meta( $postInsertId, "_" . strtolower("contacts"), true );
+								$acf_posts = get_posts( array('post_title' => 'Contacts') ) ;
+								$acf_post = get_page_by_title( 'Contacts', OBJECT, 'acf-field' ) ;
+								$field_key = $acf_post->post_name;
+								// echo " FIELD KEY: " . $field_key ;
+								update_field( "$field_key", $serialised_contacts, $postInsertId);
+
+								// This is a little trick to "catch" the image id
+								// Attach/upload the "sideloaded" image
+								// And remove the little trick
+								// add_action('add_attachment','featuredImageTrick');
+								// media_sideload_image($item->image, $postInsertId, $item->title);
+								// remove_action('add_attachment','featuredImageTrick');
+
+
+
+
 
 						} else {
 
-							echo "<br> POST TITLE: " . $postCreated["post_title"] . " DOES ALREADY EXIST" ;
+							echo "<br> POST TITLE: " . $postCreated["post_title"] . " ALREADY EXISTS " ;
 						}
 
 
-						// Get the increment id from the inserted post
-						$postInsertId = wp_insert_post( $postCreated );
-
-						// Our custom post options, for now only some meta's for the
-						// Yoast SEO plugin and a "flag" to determined if a
-						// post was imported or not
-						$postOptions = array(
-							'imported'				=> true
-						);
-
-						// Loop through the post options
-						foreach($postOptions as $key=>$value){
-
-							// Add the post options
-							update_post_meta($postInsertId,$key,$value);
-						}
-
-
-						// Create and import filter fields as taxonomies
-						//add_action( 'save_post', 'wl_api_create_taxonomies', 20, 2 );
-						//Reformat values
-						$wl_api_theme = str_replace ( "WL", "", $wellbeing_api_theme ) ;
-						wl_api_create_taxonomies ( $postInsertId, $wl_api_theme, "themes" ) ;
-
-
-						$wl_api_cost_bracket = str_replace ( "WLFREE", "Free", $wellbeing_api_cost_bracket ) ;
-						$wl_api_cost_bracket = str_replace ( "WLLowCost", "£", $wl_api_cost_bracket ) ;
-						$wl_api_cost_bracket = str_replace ( "WLMidCost", "££", $wl_api_cost_bracket ) ;
-						$wl_api_cost_bracket = str_replace ( "WLHighCost", "£££", $wl_api_cost_bracket ) ;
-						wl_api_create_taxonomies ( $postInsertId, $wl_api_cost_bracket, "costs" ) ;
-
-						$wl_api_days_of_the_week = str_replace( "WLMonday", "Monday", $wellbeing_api_days_of_the_week ) ;
-						$wl_api_days_of_the_week = str_replace( "WLTuesday", "Tuesday", $wl_api_days_of_the_week ) ;
-						$wl_api_days_of_the_week = str_replace( "WLWednesday", "Wednesday", $wl_api_days_of_the_week ) ;
-						$wl_api_days_of_the_week = str_replace( "WLThursday", "Thursday", $wl_api_days_of_the_week ) ;
-						$wl_api_days_of_the_week = str_replace( "WLFriday", "Friday", $wl_api_days_of_the_week ) ;
-						$wl_api_days_of_the_week = str_replace( "WLSaturday", "Saturday", $wl_api_days_of_the_week ) ;
-						$wl_api_days_of_the_week = str_replace( "WLSunday", "Sunday", $wl_api_days_of_the_week ) ;
-						wl_api_create_taxonomies ( $postInsertId, $wl_api_days_of_the_week, "days" ) ;
-
-						wl_api_create_taxonomies ( $postInsertId, $wl_api_postcode, "postcodes" ) ;
-
-
-						/* UPDATE CUSTOM FIELDS */
-						// WARNING FIELD NEEDS TO EXIST AND HAVE DATA BEFORE WE CAN ADD TO IT
-						// AND WE NEED TO USE THE FIELD KEY FROM POST META TABLE
-
-						// WebsiteURL
-						$field_key = get_post_meta( $postInsertId, "_" . strtolower("WebsiteUrl"), true );
-						$acf_posts = get_posts( array('post_title' => 'WebsiteUrl') ) ;
-						$acf_post = get_page_by_title( 'WebsiteUrl', OBJECT, 'acf-field' ) ;
-						$field_key = $acf_post->post_name;
-						// echo " FIELD KEY: " . $field_key ;
-						// update_field('field_5e418f9203cbd', $item["WebsiteUrl"], $postInsertId);
-						update_field( "$field_key", $item["WebsiteUrl"], $postInsertId);
-
-						// Wellbeing-API-Cost-bracket
-						$field_key = get_post_meta( $postInsertId, "_" . strtolower("Wellbeing-API-Cost-bracket"), true );
-						$acf_posts = get_posts( array('post_title' => 'Wellbeing-API-Cost-bracket') ) ;
-						$acf_post = get_page_by_title( 'Wellbeing-API-Cost-bracket', OBJECT, 'acf-field' ) ;
-						$field_key = $acf_post->post_name;
-						// echo " FIELD KEY: " . $field_key ;
-						// update_field('field_5e418f9203cbd', $item["Wellbeing-API-Cost-bracket"], $postInsertId);
-						$dummy = get_field('$field_key');
-						update_field( "$field_key", $wellbeing_api_cost_bracket, $postInsertId);
-
-						// Wellbeing-API-theme
-						$field_key = get_post_meta( $postInsertId, "_" . strtolower("Wellbeing-API-theme"), true );
-						$acf_posts = get_posts( array('post_title' => 'Wellbeing-API-theme') ) ;
-						$acf_post = get_page_by_title( 'Wellbeing-API-theme', OBJECT, 'acf-field' ) ;
-						$field_key = $acf_post->post_name;
-						// echo " FIELD KEY: " . $field_key ;
-						// update_field('field_5e418f9203cbd', $item["Wellbeing-API-theme"], $postInsertId);
-						update_field( "$field_key", $wellbeing_api_theme, $postInsertId);
-
-						// Wellbeing-API-days-of-the-week
-						$field_key = get_post_meta( $postInsertId, "_" . strtolower("Wellbeing-API-days-of-the-week"), true );
-						$acf_posts = get_posts( array('post_title' => 'Wellbeing-API-days-of-the-week') ) ;
-						$acf_post = get_page_by_title( 'Wellbeing-API-days-of-the-week', OBJECT, 'acf-field' ) ;
-						$field_key = $acf_post->post_name;
-						// echo " FIELD KEY: " . $field_key ;
-						// update_field('field_5e418f9203cbd', $item["Wellbeing-API-days-of-the-week"], $postInsertId);
-						update_field( "$field_key", $wellbeing_api_days_of_the_week, $postInsertId);
-
-						// Additional Information Fields
-						$field_key = get_post_meta( $postInsertId, "_" . strtolower("additional_information"), true );
-						$acf_posts = get_posts( array('post_title' => 'Additional Information') ) ;
-						$acf_post = get_page_by_title( 'Additional Information', OBJECT, 'acf-field' ) ;
-						$field_key = $acf_post->post_name;
-						// echo " FIELD KEY: " . $field_key ;
-						// update_field('field_5e418f9203cbd', $item["Wellbeing-API-theme"], $postInsertId);
-						update_field( "$field_key", $new_ai_row, $postInsertId);
-
-
-						// Main Address custom field aggregated for Maps API etc.
-						$field_key = get_post_meta( $postInsertId, "_" . strtolower("Main_Address"), true );
-						$acf_posts = get_posts( array('post_title' => 'Main Address') ) ;
-						$acf_post = get_page_by_title( 'Main Address', OBJECT, 'acf-field' ) ;
-						$field_key = $acf_post->post_name;
-						// echo " FIELD KEY: " . $field_key ;
-						update_field( "$field_key", $wl_api_main_address, $postInsertId);
-
-						// Logo fields
-						$field_key = get_post_meta( $postInsertId, "_" . strtolower("Logo_Description"), true );
-						$acf_posts = get_posts( array('post_title' => 'Logo Description') ) ;
-						$acf_post = get_page_by_title( 'Logo Description', OBJECT, 'acf-field' ) ;
-						$field_key = $acf_post->post_name;
-						// echo " FIELD KEY: " . $field_key ;
-						update_field( "$field_key", $wl_api_logo[0], $postInsertId);
-
-						$field_key = get_post_meta( $postInsertId, "_" . strtolower("Logo_Url"), true );
-						$acf_posts = get_posts( array('post_title' => 'Logo URL') ) ;
-						$acf_post = get_page_by_title( 'Logo URL', OBJECT, 'acf-field' ) ;
-						$field_key = $acf_post->post_name;
-						// echo " FIELD KEY: " . $field_key ;
-						update_field( "$field_key", $wl_api_logo[1], $postInsertId);
-
-						// Activity Documents custom field aggregated for Maps API etc.
-						$field_key = get_post_meta( $postInsertId, "_" . strtolower("activity_documents"), true );
-						$acf_posts = get_posts( array('post_title' => 'Activity Documents') ) ;
-						$acf_post = get_page_by_title( 'Activity Documents', OBJECT, 'acf-field' ) ;
-						$field_key = $acf_post->post_name;
-						// echo " FIELD KEY: " . $field_key ;
-						update_field( "$field_key", $serialised_documents, $postInsertId);
-
-						// Activity Images custom field aggregated for Maps API etc.
-						$field_key = get_post_meta( $postInsertId, "_" . strtolower("activity_images"), true );
-						$acf_posts = get_posts( array('post_title' => 'Activity Images') ) ;
-						$acf_post = get_page_by_title( 'Activity Images', OBJECT, 'acf-field' ) ;
-						$field_key = $acf_post->post_name;
-						// echo " FIELD KEY: " . $field_key ;
-						update_field( "$field_key", $serialised_images, $postInsertId);
-
-						// Activity Images custom field aggregated for Maps API etc.
-						$field_key = get_post_meta( $postInsertId, "_" . strtolower("contacts"), true );
-						$acf_posts = get_posts( array('post_title' => 'Contacts') ) ;
-						$acf_post = get_page_by_title( 'Contacts', OBJECT, 'acf-field' ) ;
-						$field_key = $acf_post->post_name;
-						// echo " FIELD KEY: " . $field_key ;
-						update_field( "$field_key", $serialised_contacts, $postInsertId);
-
-						// This is a little trick to "catch" the image id
-						// Attach/upload the "sideloaded" image
-						// And remove the little trick
-						// add_action('add_attachment','featuredImageTrick');
-						// media_sideload_image($item->image, $postInsertId, $item->title);
-						// remove_action('add_attachment','featuredImageTrick');
 					}
 
 				} else {
