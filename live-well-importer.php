@@ -216,7 +216,7 @@ function live_well_importer_handle_post(){
 	
 						);
 
-						if ( get_page_by_title( $postCreated["post_title"] ) == null ) {
+						if ( get_page_by_title( sanitize_title( $postCreated["post_title"] ) == null ) {
 
 							echo "<br> NO POST TITLE FOUND IN DB";
 
