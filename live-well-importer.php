@@ -47,33 +47,32 @@ function wl_api_create_taxonomies($postInsertId, $wl_api_terms, $wl_api_taxonomy
 function live_well_importer_handle_post(){
         // First check if the file appears on the _FILES array
         if(isset($_POST['api_url'])){
-                $api_url = $_POST['api_url'];
- 
-    	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLActive";
-    	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLCalm";
-    	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLCreative";
-    	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLSocial";
-    	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLUseful";
+
+            $api_url = $_POST['api_url'];
+	 
+	    	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLActive";
+	    	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLCalm";
+	    	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLCreative";
+	    	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLSocial";
+	    	$api_data[] = "https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLUseful";
 
 
+	    	$reset_data = $_POST['reset_data']; 
 
-		    	$reset_data = $_POST['reset_data']; 
-
-		    	if ( $reset_data ){
-		    		$live_well_importer_start = 1 ;
-		    	}
+	    	if ( $reset_data ){
+	    		$live_well_importer_start = 1 ;
+	    	}
 
 
-                echo $api_url;
+            echo $api_url;
 
-				// Disable a time limit
-				set_time_limit(0);
+			// Disable a time limit
+			set_time_limit(0);
 
-				// Require some Wordpress core files for processing images
-				require_once(ABSPATH . 'wp-admin/includes/media.php');
-				require_once(ABSPATH . 'wp-admin/includes/file.php');
-				require_once(ABSPATH . 'wp-admin/includes/image.php');
-
+			// Require some Wordpress core files for processing images
+			require_once(ABSPATH . 'wp-admin/includes/media.php');
+			require_once(ABSPATH . 'wp-admin/includes/file.php');
+			require_once(ABSPATH . 'wp-admin/includes/image.php');
 
 
 			foreach ($api_data as $api_url) {
@@ -118,7 +117,9 @@ function live_well_importer_handle_post(){
 						wp_delete_post( $post->ID, true);
 					}
 				} else {
+
 					echo "DO NOT RESET DATA";
+
 				}
 					// Loop through some items in the xml 
 					$service = $data["Services"] ;
@@ -377,6 +378,8 @@ function live_well_importer_handle_post(){
 								// remove_action('add_attachment','featuredImageTrick');
 
 
+					    		// Only reset data on the first run-through
+					    		$live_well_importer_start = 0 ;
 
 
 
