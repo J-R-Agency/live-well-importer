@@ -216,6 +216,11 @@ function live_well_importer_handle_post(){
 	
 						);
 
+
+
+						echo "<br> POST TITLE: " $postCreated["post_title"];
+
+
 						// Get the increment id from the inserted post
 						$postInsertId = wp_insert_post( $postCreated );
 
