@@ -216,7 +216,7 @@ function live_well_importer_handle_post(){
 	
 						);
 
-						$title_to_check = sanitize_title( $postCreated["post_title"] ) ;
+						$title_to_check =  $postCreated["post_title"] ;
 
 						if ( get_page_by_title( $title_to_check == null ) {
 
