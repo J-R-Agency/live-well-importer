@@ -63,9 +63,6 @@ function live_well_importer_handle_post(){
 	    		$live_well_importer_start = 1 ;
 	    	}
 
-
-            echo $api_url;
-
 			// Disable a time limit
 			set_time_limit(0);
 
@@ -78,6 +75,8 @@ function live_well_importer_handle_post(){
 			foreach ($api_data as $api_url) {
 				# code...
 
+				echo "<br>" . $api_url;
+
 			    $json_data = file_get_contents($api_url);  
 			    //convert json object to php associative array
 			    $data = json_decode($json_data, true);
@@ -86,14 +85,14 @@ function live_well_importer_handle_post(){
 
 				// Succesfully loaded?
 				if( $data !== FALSE ){
-					echo " Is DATA ";
+					echo "<br> Is DATA ";
 /*				    echo "<pre>";
 					print_r( $data["Services"] );
 				    echo "<pre>";*/
 
 				    if ( $live_well_importer_start ) {
 
-				    echo "RESET DATA";
+				    echo "<br> RESET DATA ";
 
 					// First remove all previous imported posts
 					$currentPosts = get_posts( array( 
@@ -118,7 +117,7 @@ function live_well_importer_handle_post(){
 					}
 				} else {
 
-					echo "DO NOT RESET DATA";
+					echo "<br> DO NOT RESET DATA ";
 
 				}
 					// Loop through some items in the xml 
@@ -129,7 +128,7 @@ function live_well_importer_handle_post(){
 						$wl_api_main_address = "" ;
 						$wl_api_postcode = "" ;
 
-						print_r( $item["Name"] . " // " . $item["WebsiteUrl"] . " // " . $item["Organisation"] . " <br> " );
+						print_r( "<br>" . $item["Name"] . " // " . $item["WebsiteUrl"] . " // " . $item["Organisation"] . " <br> " );
 						// echo "<pre>";
 						// print_r( $item["Locations"] );
 						// print_r( $item["Logo"] );
@@ -392,7 +391,7 @@ function live_well_importer_handle_post(){
 					}
 
 				} else {
-					echo " Not DATA ";
+					echo "<br> Not DATA ";
 				}
  
  			}
