@@ -2,8 +2,8 @@
 /*
 Plugin Name: Live Well Importer plugin for Wellbeing Liverpool
 Plugin URI: https://www.jnragency.co.uk/
-Description: Live Well Importer plugin for Wellbeing Liverpool
-Version: 0.4
+Description: Live Well Importer plugin for Wellbeing Liverpool (match theme version)
+Version: v1.2
 Author: Greg Macoy
 Author URI: https://www.jnragency.co.uk/
 */
