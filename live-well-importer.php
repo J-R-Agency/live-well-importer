@@ -3,7 +3,7 @@
 Plugin Name: Live Well Importer plugin for Wellbeing Liverpool
 Plugin URI: https://www.jnragency.co.uk/
 Description: Live Well Importer plugin for Wellbeing Liverpool (match theme version)
-Version: v1.3
+Version: v1.4
 Author: Greg Macoy
 Author URI: https://www.jnragency.co.uk/
 */
@@ -254,9 +254,9 @@ function live_well_importer_handle_post(){
 
 
 								$wl_api_cost_bracket = str_replace ( "WLFREE", "Free", $wellbeing_api_cost_bracket ) ;
-								$wl_api_cost_bracket = str_replace ( "WLLowCost", "£", $wl_api_cost_bracket ) ;
-								$wl_api_cost_bracket = str_replace ( "WLMidCost", "££", $wl_api_cost_bracket ) ;
-								$wl_api_cost_bracket = str_replace ( "WLHighCost", "£££", $wl_api_cost_bracket ) ;
+								$wl_api_cost_bracket = str_replace ( "WLLowCost", "£ (up to £5)", $wl_api_cost_bracket ) ;
+								$wl_api_cost_bracket = str_replace ( "WLMidCost", "££ (£6-£9)", $wl_api_cost_bracket ) ;
+								$wl_api_cost_bracket = str_replace ( "WLHighCost", "£££ (£10+)", $wl_api_cost_bracket ) ;
 								wl_api_create_taxonomies ( $postInsertId, $wl_api_cost_bracket, "costs" ) ;
 
 								$wl_api_days_of_the_week = str_replace( "WLMonday", "Monday", $wellbeing_api_days_of_the_week ) ;
