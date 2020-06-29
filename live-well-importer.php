@@ -3,7 +3,7 @@
 Plugin Name: Live Well Importer plugin for Wellbeing Liverpool
 Plugin URI: https://www.jnragency.co.uk/
 Description: Live Well Importer plugin for Wellbeing Liverpool (match theme version)
-Version: v1.6
+Version: v1.8
 Author: Greg Macoy
 Author URI: https://www.jnragency.co.uk/
 */
@@ -163,6 +163,10 @@ function live_well_importer_handle_post(){
 							}
 							elseif ( $additionalfield["Name"] == "Wellbeing-API-days-of-the-week" ){
 								$wellbeing_api_days_of_the_week = implode(",", $additionalfield["Values"]) ;
+							}elseif ( $additionalfield["Name"] == "Wellbeing-API-online" ){
+								$wellbeing_api_online = implode(",", $additionalfield["Values"]) ;
+							}elseif ( $additionalfield["Name"] == "Wellbeing-API-search-terms" ){
+								$wellbeing_api_search_terms = implode(",", $additionalfield["Values"]) ;
 							}else{
 								$new_ai_row .= "<dt>" . $additionalfield["Name"] . "</dt>" ;
 								$new_ai_row .= "<dd>" . implode( "&nbsp;",  $additionalfield["Values"] ) . "</dd>" ;
@@ -270,8 +274,9 @@ function live_well_importer_handle_post(){
 
 								wl_api_create_taxonomies ( $postInsertId, $wl_api_postcode, "postcodes" ) ;
 
+/*								
 								wl_api_create_taxonomies ( $postInsertId, $wl_api_postcode_expanded, "postcodes_expanded" ) ;
-
+*/
 								/* UPDATE CUSTOM FIELDS */
 								// WARNING FIELD NEEDS TO EXIST AND HAVE DATA BEFORE WE CAN ADD TO IT
 								// AND WE NEED TO USE THE FIELD KEY FROM POST META TABLE
@@ -312,6 +317,24 @@ function live_well_importer_handle_post(){
 								// echo " FIELD KEY: " . $field_key ;
 								// update_field('field_5e418f9203cbd', $item["Wellbeing-API-days-of-the-week"], $postInsertId);
 								update_field( "$field_key", $wellbeing_api_days_of_the_week, $postInsertId);
+
+								// Wellbeing-API-online
+								$field_key = get_post_meta( $postInsertId, "_" . strtolower("Wellbeing-API-online"), true );
+								$acf_posts = get_posts( array('post_title' => 'Wellbeing-API-online') ) ;
+								$acf_post = get_page_by_title( 'Wellbeing-API-online', OBJECT, 'acf-field' ) ;
+								$field_key = $acf_post->post_name;
+								// echo " FIELD KEY: " . $field_key ;
+								// update_field('field_5e418f9203cbd', $item["Wellbeing-API-days-of-the-week"], $postInsertId);
+								update_field( "$field_key", $wellbeing_api_online, $postInsertId);
+
+								// Wellbeing-API-search-terms
+								$field_key = get_post_meta( $postInsertId, "_" . strtolower("Wellbeing-API-search-terms"), true );
+								$acf_posts = get_posts( array('post_title' => 'Wellbeing-API-search-terms') ) ;
+								$acf_post = get_page_by_title( 'Wellbeing-API-search-terms', OBJECT, 'acf-field' ) ;
+								$field_key = $acf_post->post_name;
+								// echo " FIELD KEY: " . $field_key ;
+								// update_field('field_5e418f9203cbd', $item["Wellbeing-API-days-of-the-week"], $postInsertId);
+								update_field( "$field_key", $wellbeing_api_search_terms, $postInsertId);
 
 								// Additional Information Fields
 								$field_key = get_post_meta( $postInsertId, "_" . strtolower("additional_information"), true );
