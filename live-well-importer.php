@@ -275,8 +275,18 @@ function live_well_importer_handle_post(){
 
 								wl_api_create_taxonomies ( $postInsertId, $wl_api_postcode, "postcodes" ) ;
 
-								$wellbeing_api_remote = str_replace ( "WLRemote", "Remote", $wellbeing_api_remote ) ;
-								wl_api_create_taxonomies ( $postInsertId, $wellbeing_api_remote, "remote" ) ;
+								if ( $wellbeing_api_remote == "WLRemote" ) {
+
+									$wellbeing_api_remote = str_replace ( "WLRemote", "Remote", $wellbeing_api_remote ) ;
+									wl_api_create_taxonomies ( $postInsertId, $wellbeing_api_remote, "remote" ) ;
+									echo "<p>Entry has remote options</p>";
+
+								} else {
+
+									echo "<p>No remote options</p>";
+
+								}
+
 
 /*								
 								wl_api_create_taxonomies ( $postInsertId, $wl_api_postcode_expanded, "postcodes_expanded" ) ;
