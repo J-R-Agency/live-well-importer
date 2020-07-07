@@ -127,6 +127,7 @@ function live_well_importer_handle_post(){
 						// Initialise
 						$wl_api_main_address = "" ;
 						$wl_api_postcode = "" ;
+						$wl_api_remote = "" ;
 
 						print_r( "<br>" . $item["Name"] . " // " . $item["WebsiteUrl"] . " // " . $item["Organisation"] . " <br> " );
 						// echo "<pre>";
