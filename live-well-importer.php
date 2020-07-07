@@ -21,10 +21,10 @@ function live_well_importer_init(){
 	    live_well_importer_handle_post();
 
         echo "<h1>Live Well Importer</h1>
-        <h2>Import data from Live Well API (please use Live Well API URL)</h2>
+        <h2>Import data from Live Well API <!--(please use Live Well API URL)--></h2>
         <!-- Form to handle the upload - The enctype value here is very important -->
         <form  method=\"post\" enctype=\"multipart/form-data\">
-                <input type=\"text\" id=\"api_url\" name=\"api_url\" value=\"https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLActive\" size=\"100\"></input>
+                <input type=\"hidden\" id=\"api_url\" name=\"api_url\" value=\"https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLActive\" size=\"100\"></input>
                 <input type=\"checkbox\" id=\"reset_data\" name=\"reset_data\" value=\"1\"> <label for=\"reset_data\">Reset Data?</label>";
         		submit_button('Import');
         echo "</form>";
@@ -420,9 +420,11 @@ function live_well_importer_handle_post(){
 				}
  
  			}
+
+        	echo "<h2>FINISHED</h2>";
  
         }
-        echo "<h2>FINISHED</h2>";
+
 }
 
 ?>
