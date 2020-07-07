@@ -3,7 +3,7 @@
 Plugin Name: Live Well Importer plugin for Wellbeing Liverpool
 Plugin URI: https://www.jnragency.co.uk/
 Description: Live Well Importer plugin for Wellbeing Liverpool (match theme version)
-Version: v1.8
+Version: v1.9 (Sandbox)
 Author: Greg Macoy
 Author URI: https://www.jnragency.co.uk/
 */
@@ -163,8 +163,8 @@ function live_well_importer_handle_post(){
 							}
 							elseif ( $additionalfield["Name"] == "Wellbeing-API-days-of-the-week" ){
 								$wellbeing_api_days_of_the_week = implode(",", $additionalfield["Values"]) ;
-							}elseif ( $additionalfield["Name"] == "Wellbeing-API-online" ){
-								$wellbeing_api_online = implode(",", $additionalfield["Values"]) ;
+							}elseif ( $additionalfield["Name"] == "Wellbeing-API-remote" ){
+								$wellbeing_api_remote = implode(",", $additionalfield["Values"]) ;
 							}elseif ( $additionalfield["Name"] == "Wellbeing-API-search-terms" ){
 								$wellbeing_api_search_terms = implode(",", $additionalfield["Values"]) ;
 							}else{
@@ -318,14 +318,12 @@ function live_well_importer_handle_post(){
 								// update_field('field_5e418f9203cbd', $item["Wellbeing-API-days-of-the-week"], $postInsertId);
 								update_field( "$field_key", $wellbeing_api_days_of_the_week, $postInsertId);
 
-								// Wellbeing-API-online
-								$field_key = get_post_meta( $postInsertId, "_" . strtolower("Wellbeing-API-online"), true );
-								$acf_posts = get_posts( array('post_title' => 'Wellbeing-API-online') ) ;
-								$acf_post = get_page_by_title( 'Wellbeing-API-online', OBJECT, 'acf-field' ) ;
+								// Wellbeing-API-remote
+								$field_key = get_post_meta( $postInsertId, "_" . strtolower("Wellbeing-API-remote"), true );
+								$acf_posts = get_posts( array('post_title' => 'Wellbeing-API-remote') ) ;
+								$acf_post = get_page_by_title( 'Wellbeing-API-remote', OBJECT, 'acf-field' ) ;
 								$field_key = $acf_post->post_name;
-								// echo " FIELD KEY: " . $field_key ;
-								// update_field('field_5e418f9203cbd', $item["Wellbeing-API-days-of-the-week"], $postInsertId);
-								update_field( "$field_key", $wellbeing_api_online, $postInsertId);
+								update_field( "$field_key", $wellbeing_api_remote, $postInsertId);
 
 								// Wellbeing-API-search-terms
 								$field_key = get_post_meta( $postInsertId, "_" . strtolower("Wellbeing-API-search-terms"), true );
