@@ -3,7 +3,7 @@
 Plugin Name: Live Well Importer plugin for Wellbeing Liverpool
 Plugin URI: https://www.jnragency.co.uk/
 Description: Live Well Importer plugin for Wellbeing Liverpool (match theme version)
-Version: v1.9 (Sandbox)
+Version: v1.10 (Sandbox)
 Author: Greg Macoy
 Author URI: https://www.jnragency.co.uk/
 */
@@ -273,6 +273,9 @@ function live_well_importer_handle_post(){
 								wl_api_create_taxonomies ( $postInsertId, $wl_api_days_of_the_week, "days" ) ;
 
 								wl_api_create_taxonomies ( $postInsertId, $wl_api_postcode, "postcodes" ) ;
+
+								$wellbeing_api_remote = str_replace ( "WLRemote", "Remote", $wellbeing_api_remote ) ;
+								wl_api_create_taxonomies ( $postInsertId, $wellbeing_api_remote, "remote" ) ;
 
 /*								
 								wl_api_create_taxonomies ( $postInsertId, $wl_api_postcode_expanded, "postcodes_expanded" ) ;
