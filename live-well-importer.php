@@ -194,7 +194,7 @@ function live_well_importer_handle_post(){
 							 	$wl_api_main_address = $item["Name"] . ", " . $location["AddressLine1"] . ", " . $location["AddressLine2"] . ", " . $location["Postcode"] ;
 							 	if ( $location["Postcode"] != "" ) {
 							 		$wl_api_postcode_parts = explode(" ", $location["Postcode"] ) ;
-							 		if ( $wl_api_postcode_parts[0] != "" ) {
+							 		if ( $wl_api_postcode_parts[0] != "" && substr($wl_api_postcode_parts[0], 0, 2) != "WA" ) {
 										$wl_api_postcode = $wl_api_postcode_parts[0] ; // Get first half of postcode, e.g. L3
 							 		}
 							 	}
@@ -277,7 +277,7 @@ function live_well_importer_handle_post(){
 
 								if ( $wellbeing_api_remote == "WLRemote" ) {
 
-									$wellbeing_api_remote = str_replace ( "WLRemote", "Remote", $wellbeing_api_remote ) ;
+									$wellbeing_api_remote = str_replace ( "WLRemote", "Yes", $wellbeing_api_remote ) ;
 									wl_api_create_taxonomies ( $postInsertId, $wellbeing_api_remote, "remote" ) ;
 									echo "<p>Entry has remote options</p>";
 
