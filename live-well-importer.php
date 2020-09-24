@@ -168,6 +168,8 @@ function live_well_importer_handle_post(){
 								$wellbeing_api_remote = implode(",", $additionalfield["Values"]) ;
 							}elseif ( $additionalfield["Name"] == "Wellbeing-API-search-terms" ){
 								$wellbeing_api_search_terms = implode(",", $additionalfield["Values"]) ;
+							}elseif ( $additionalfield["Name"] == "Council Area" ){
+								$wellbeing_api_search_terms = "" ;
 							}else{
 								$new_ai_row .= "<dt>" . $additionalfield["Name"] . "</dt>" ;
 								$new_ai_row .= "<dd>" . implode( "&nbsp;",  $additionalfield["Values"] ) . "</dd>" ;
@@ -397,7 +399,7 @@ function live_well_importer_handle_post(){
 								// echo " FIELD KEY: " . $field_key ;
 								update_field( "$field_key", $serialised_images, $postInsertId);
 
-								// Activity Images custom field aggregated for Maps API etc.
+								// Activity Contacts custom field aggregated for Maps API etc.
 								$field_key = get_post_meta( $postInsertId, "_" . strtolower("contacts"), true );
 								$acf_posts = get_posts( array('post_title' => 'Contacts') ) ;
 								$acf_post = get_page_by_title( 'Contacts', OBJECT, 'acf-field' ) ;
