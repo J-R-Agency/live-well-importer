@@ -2,8 +2,8 @@
 /*
 Plugin Name: Live Well Importer plugin for Wellbeing Liverpool
 Plugin URI: https://www.jnragency.co.uk/
-Description: Live Well Importer plugin for Wellbeing Liverpool
-Version: 0.4
+Description: Live Well Importer plugin for Wellbeing Liverpool (match theme version)
+Version: v1.11 (Sandbox)
 Author: Greg Macoy
 Author URI: https://www.jnragency.co.uk/
 */
@@ -21,10 +21,10 @@ function live_well_importer_init(){
 	    live_well_importer_handle_post();
 
         echo "<h1>Live Well Importer</h1>
-        <h2>Import data from Live Well API (please use Live Well API URL)</h2>
+        <h2>Import data from Live Well API <!--(please use Live Well API URL)--></h2>
         <!-- Form to handle the upload - The enctype value here is very important -->
         <form  method=\"post\" enctype=\"multipart/form-data\">
-                <input type=\"text\" id=\"api_url\" name=\"api_url\" value=\"https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLActive\" size=\"100\"></input>
+                <input type=\"hidden\" id=\"api_url\" name=\"api_url\" value=\"https://www.thelivewelldirectory.com/api/search?apikey=X59WU602uf&Keywords=WLActive\" size=\"100\"></input>
                 <input type=\"checkbox\" id=\"reset_data\" name=\"reset_data\" value=\"1\"> <label for=\"reset_data\">Reset Data?</label>";
         		submit_button('Import');
         echo "</form>";
@@ -127,6 +127,7 @@ function live_well_importer_handle_post(){
 						// Initialise
 						$wl_api_main_address = "" ;
 						$wl_api_postcode = "" ;
+						$wl_api_remote = "" ;
 
 						print_r( "<br>" . $item["Name"] . " // " . $item["WebsiteUrl"] . " // " . $item["Organisation"] . " <br> " );
 						// echo "<pre>";
@@ -163,6 +164,12 @@ function live_well_importer_handle_post(){
 							}
 							elseif ( $additionalfield["Name"] == "Wellbeing-API-days-of-the-week" ){
 								$wellbeing_api_days_of_the_week = implode(",", $additionalfield["Values"]) ;
+							}elseif ( $additionalfield["Name"] == "Wellbeing-API-remote" ){
+								$wellbeing_api_remote = implode(",", $additionalfield["Values"]) ;
+							}elseif ( $additionalfield["Name"] == "Wellbeing-API-search-terms" ){
+								$wellbeing_api_search_terms = implode(",", $additionalfield["Values"]) ;
+							}elseif ( $additionalfield["Name"] == "Council Area" ){
+								$wellbeing_api_search_terms = "" ;
 							}else{
 								$new_ai_row .= "<dt>" . $additionalfield["Name"] . "</dt>" ;
 								$new_ai_row .= "<dd>" . implode( "&nbsp;",  $additionalfield["Values"] ) . "</dd>" ;
@@ -189,8 +196,8 @@ function live_well_importer_handle_post(){
 							 	$wl_api_main_address = $item["Name"] . ", " . $location["AddressLine1"] . ", " . $location["AddressLine2"] . ", " . $location["Postcode"] ;
 							 	if ( $location["Postcode"] != "" ) {
 							 		$wl_api_postcode_parts = explode(" ", $location["Postcode"] ) ;
-							 		if ( $wl_api_postcode_parts[0] != "" ) {
-										$wl_api_postcode = $wl_api_postcode_parts[0] ;
+							 		if ( $wl_api_postcode_parts[0] != "" && substr($wl_api_postcode_parts[0], 0, 2) != "WA" ) {
+										$wl_api_postcode = $wl_api_postcode_parts[0] ; // Get first half of postcode, e.g. L3
 							 		}
 							 	}
 
@@ -270,7 +277,22 @@ function live_well_importer_handle_post(){
 
 								wl_api_create_taxonomies ( $postInsertId, $wl_api_postcode, "postcodes" ) ;
 
+								if ( $wellbeing_api_remote == "WLRemote" ) {
 
+									$wellbeing_api_remote = str_replace ( "WLRemote", "Yes", $wellbeing_api_remote ) ;
+									wl_api_create_taxonomies ( $postInsertId, $wellbeing_api_remote, "remote" ) ;
+									echo "<p>Entry has remote options</p>";
+
+								} else {
+
+									echo "<p>No remote options</p>";
+
+								}
+
+
+/*								
+								wl_api_create_taxonomies ( $postInsertId, $wl_api_postcode_expanded, "postcodes_expanded" ) ;
+*/
 								/* UPDATE CUSTOM FIELDS */
 								// WARNING FIELD NEEDS TO EXIST AND HAVE DATA BEFORE WE CAN ADD TO IT
 								// AND WE NEED TO USE THE FIELD KEY FROM POST META TABLE
@@ -311,6 +333,22 @@ function live_well_importer_handle_post(){
 								// echo " FIELD KEY: " . $field_key ;
 								// update_field('field_5e418f9203cbd', $item["Wellbeing-API-days-of-the-week"], $postInsertId);
 								update_field( "$field_key", $wellbeing_api_days_of_the_week, $postInsertId);
+
+								// Wellbeing-API-remote
+								$field_key = get_post_meta( $postInsertId, "_" . strtolower("Wellbeing-API-remote"), true );
+								$acf_posts = get_posts( array('post_title' => 'Wellbeing-API-remote') ) ;
+								$acf_post = get_page_by_title( 'Wellbeing-API-remote', OBJECT, 'acf-field' ) ;
+								$field_key = $acf_post->post_name;
+								update_field( "$field_key", $wellbeing_api_remote, $postInsertId);
+
+								// Wellbeing-API-search-terms
+								$field_key = get_post_meta( $postInsertId, "_" . strtolower("Wellbeing-API-search-terms"), true );
+								$acf_posts = get_posts( array('post_title' => 'Wellbeing-API-search-terms') ) ;
+								$acf_post = get_page_by_title( 'Wellbeing-API-search-terms', OBJECT, 'acf-field' ) ;
+								$field_key = $acf_post->post_name;
+								// echo " FIELD KEY: " . $field_key ;
+								// update_field('field_5e418f9203cbd', $item["Wellbeing-API-days-of-the-week"], $postInsertId);
+								update_field( "$field_key", $wellbeing_api_search_terms, $postInsertId);
 
 								// Additional Information Fields
 								$field_key = get_post_meta( $postInsertId, "_" . strtolower("additional_information"), true );
@@ -361,7 +399,7 @@ function live_well_importer_handle_post(){
 								// echo " FIELD KEY: " . $field_key ;
 								update_field( "$field_key", $serialised_images, $postInsertId);
 
-								// Activity Images custom field aggregated for Maps API etc.
+								// Activity Contacts custom field aggregated for Maps API etc.
 								$field_key = get_post_meta( $postInsertId, "_" . strtolower("contacts"), true );
 								$acf_posts = get_posts( array('post_title' => 'Contacts') ) ;
 								$acf_post = get_page_by_title( 'Contacts', OBJECT, 'acf-field' ) ;
@@ -395,9 +433,11 @@ function live_well_importer_handle_post(){
 				}
  
  			}
+
+        	echo "<h2>FINISHED</h2>";
  
         }
-        echo "<h2>FINISHED</h2>";
+
 }
 
 ?>
